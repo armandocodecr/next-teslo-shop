@@ -14,7 +14,7 @@ export async function middleware( req: NextRequest, ev: NextFetchEvent ) {
 
         if (!session) {
 
-            return NextResponse.redirect(`${url.origin}/auth/login?p=${requestedPage}`);
+            return NextResponse.rewrite(`${url.origin}/auth/login?p=${requestedPage}`);
             
         }
 
@@ -41,6 +41,11 @@ export async function middleware( req: NextRequest, ev: NextFetchEvent ) {
     }
 
     export const config ={
+        runtime: 'experimental-edge', // for Edge API Routes only
+        unstable_allowDynamic: [
+            '/lib/utilities.js', // allows a single file
+            '/node_modules/function-bind/**', // use a glob to allow anything in the function-bind 3rd party module
+        ],
         matcher: ['/checkout/address', '/checkout/summary', '/admin', '/admin/users', '/admin/products', '/admin/orders']
     }
     

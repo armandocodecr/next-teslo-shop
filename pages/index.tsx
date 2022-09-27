@@ -10,6 +10,8 @@ const HomePage: NextPage = () => {
 
   const { products, isLoading } = useProducts('/products')
 
+  console.log('productos: ',products)
+
   return (
    <ShopLayout title={ 'Tesla-Shop - Home'} pageDescription={'Encuentra los mejores productos de Teslo aqui'} >
       <Typography variant='h1' component='h1'>Tienda</Typography> 
