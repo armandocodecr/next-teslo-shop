@@ -61,21 +61,21 @@ export const SideMenu = () => {
 
                 {
                     isLoggedIn && (
-                        <>
-                        <ListItem button>
-                            <ListItemIcon>
-                                <AccountCircleOutlined/>
-                            </ListItemIcon>
-                            <ListItemText primary={'Perfil'} />
-                        </ListItem>
+                        <div>
+                            <ListItem button>
+                                <ListItemIcon>
+                                    <AccountCircleOutlined/>
+                                </ListItemIcon>
+                                <ListItemText primary={'Perfil'} />
+                            </ListItem>
 
-                        <ListItem button onClick={() => navigateTo('/orders/history')}>
-                            <ListItemIcon >
-                                <ConfirmationNumberOutlined/>
-                            </ListItemIcon>
-                            <ListItemText primary={'Mis Ordenes'} />
-                        </ListItem>
-                        </>
+                            <ListItem button onClick={() => navigateTo('/orders/history')}>
+                                <ListItemIcon >
+                                    <ConfirmationNumberOutlined/>
+                                </ListItemIcon>
+                                <ListItemText primary={'Mis Ordenes'} />
+                            </ListItem>
+                        </div>
                     )
                 }
 
@@ -127,7 +127,7 @@ export const SideMenu = () => {
                 {/* Admin */}
                 {
                     user?.role === "admin" && (
-                        <>
+                        <div>
                             <Divider />
                             <ListSubheader>Admin Panel</ListSubheader>
 
@@ -169,7 +169,7 @@ export const SideMenu = () => {
                                 </ListItemIcon>
                                 <ListItemText primary={'Usuarios'} />
                             </ListItem>
-                        </>
+                        </div>
                     )
                 }
             </List>

@@ -1,5 +1,4 @@
 import { FC, useReducer, useEffect } from 'react';
-import { useRouter } from 'next/router';
 import { useSession, signOut } from 'next-auth/react';
 import Cookies from 'js-cookie';
 import axios, { AxiosError } from 'axios';

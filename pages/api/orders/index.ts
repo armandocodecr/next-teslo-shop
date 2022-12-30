@@ -48,7 +48,6 @@ const createOrder = async ( req: NextApiRequest, res: NextApiResponse ) => {
                 throw new Error('Verifique el carrito de nuevo, producto no existe')
             }
 
-
             return (currentPrice * current.quantity!) + prev
 
         }, 0);

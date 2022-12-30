@@ -63,15 +63,6 @@ const OrderPage: NextPage<Props> = ({ order }) => {
     <ShopLayout title='Resumen de la orden' pageDescription={'Resumen de la orden'}>
 
         <Typography variant='h1' component='h1' sx={{ mb: 2 }}>Orden: { order._id }</Typography>
-
-        {/* <Chip 
-            sx={{ my: 2 }}
-            label='Pendiente de pago'
-            variant='outlined'
-            color='error'
-            icon={ <CreditCardOffOutlined /> }
-        /> */}
-
         {
             order.isPaid
             ? (

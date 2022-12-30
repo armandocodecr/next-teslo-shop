@@ -8,9 +8,7 @@ import { FullScreenLoading } from '../components/ui';
 
 const HomePage: NextPage = () => {
 
-  const { products, isLoading } = useProducts('/products')
-
-  console.log('productos: ',products)
+  const { products, isLoading } = useProducts('/products');
 
   return (
    <ShopLayout title={ 'Tesla-Shop - Home'} pageDescription={'Encuentra los mejores productos de Teslo aqui'} >

@@ -158,7 +158,7 @@ const ProductAdminPage:FC<Props> = ({ product, slug }) => {
                     showConfirmButton: false,
                     timer: 1500
                   })
-                router.replace(`/admin/products/${ form.slug }`);
+                router.replace(`/icecream/${ form.slug }`);
                 setIsSaving(false);
             }else{
                 Swal.fire({

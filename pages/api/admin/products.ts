@@ -141,8 +141,8 @@ const createProduct = async (req: NextApiRequest, res: NextApiResponse<Data>) =>
         
     } catch (error) {
         await db.disconnect();
-            return res.status(400).json({ message: 'Revisar logs del servidor' });
-            console.log(error);
+        return res.status(400).json({ message: 'Revisar logs del servidor' });
+        console.log(error);
     }
 
 }
@@ -167,7 +167,6 @@ const deleteProduct = async (req: NextApiRequest, res: NextApiResponse<Data>) =>
 
         //https://res.cloudinary.com/dyuj1zglt/image/upload/v1661384005/hztx4he9h7uizeounk2w.jpg
         product.images.forEach( async (image, i) => {
-            console.log( 'Buenardo: ', image);
             if( images[i].includes(image) ){
                 //Borrar de Cloudinary
                 const [ fileId, extension ] = image.substring(  image.lastIndexOf('/') + 1 ).split('.'); //Buscamos la posición índice del último "/", sumamos 1 porque quiero eliminar también el "/"
