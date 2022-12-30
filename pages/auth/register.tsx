@@ -44,22 +44,6 @@ const RegisterPage = () => {
 
         await signIn( 'credentials', { email, password } );
 
-        // const destination = router.query.p?.toString() || '/'
-        // //Esto se hace para saber en qué pagina estaba la persona al cerrar sección, para que cuando e vuelva logear aparezca en la misma.
-        // router.replace(destination)
-
-        // try {
-            
-        //     const { data } = await tesloApi.post('/user/register', {  name, email, password });
-        //     const { token, user } = data;
-        //     console.log({ token, user });
-
-        // } catch (error) {
-        //     console.log('Error en las credenciales')
-        //     setShowError(true);
-        //     setTimeout( () => { setShowError(false) }, 3000 )
-        // }
-
     }
 
   return (
@@ -139,7 +123,7 @@ const RegisterPage = () => {
                     </Grid>
 
                     <Grid item xs={12} display='flex' justifyContent='center'>
-                    <NextLink href={ !router.query.p?.toString() ? '/auth/login' : `/auth/login?p=${ router.query.p?.toString() }`} passHref>
+                    <NextLink href={ !router.query.p?.toString() ? '/auth/login' : `/auth/login?p=${ router.query.p?.toString() }`} passHref legacyBehavior>
                             <Link underline='always'>
                                 ¿Ya tienes cuenta?
                             </Link>

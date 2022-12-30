@@ -29,7 +29,7 @@ export const CartList: FC<Props> = ({ editable = false, products }) => {
                 //Agrego en la key "+ size" ya que react se queja de cuando agregamos al carritos un producto con el mismo slug pero diferente talla
                 <Grid container spacing={2} key={ product.slug + product.size } sx={{ mb: 1, mt: 1 }} > 
                     <Grid item xs={ 3 }>
-                        <NextLink href={`/product/${ product.slug }`} passHref>
+                        <NextLink href={`/product/${ product.slug }`} passHref legacyBehavior>
                             <Link>
                                 <CardActionArea>
                                     <CardMedia 
