@@ -7,6 +7,13 @@ import { dbUsers } from '../../../database';
 
 
 export default NextAuth({
+
+  session: {
+    maxAge: 2592000, //30d durará la session
+    strategy: 'jwt',
+    updateAge: 86400, //cada dia se va a actualizar
+  },
+
   providers: [
 
     Credentials({
@@ -15,11 +22,10 @@ export default NextAuth({
         email: { label: 'Correo:', type: 'email', placeholder: 'Ingresa tu correo' },
         password: { label: 'Contraseña:', type: 'password', placeholder: 'Ingresa tu contraseña' },
       },
-      async authorize(credentials) {
 
-        console.log({credentials})
+      async authorize(credentials: any) {
 
-        return await dbUsers.checkUserEmailPassword( credentials!.email, credentials!.password );
+      return await dbUsers.checkUserEmailPassword( credentials!.email, credentials!.password );
 
       }
     }),
@@ -56,11 +62,6 @@ export default NextAuth({
     // secret: process.env.JWT_SECRET_SEED, // deprecated
   },
 
-  session: {
-    maxAge: 2592000, //30d durará la session
-    strategy: 'jwt',
-    updateAge: 86400, //cada dia se va a actualizar
-  },
 
 
   callbacks: {
