@@ -68,9 +68,6 @@ const payOrder = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
         }
     }
 
-    //toDo: Validar MoongoId
-
-
     const paypalBearerToken = await getPaypalBearerToken(); //Obtenemos el token de validacion
 
     if( !paypalBearerToken ) {

@@ -57,7 +57,7 @@ const updateUser = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
     await user!.save();
     await db.disconnect();
 
-    res.status(200).json({ message: 'uSUARIO ACTUALIZADO'});
+    res.status(200).json({ message: 'USUARIO ACTUALIZADO'});
 
 }
 

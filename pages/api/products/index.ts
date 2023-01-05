@@ -28,26 +28,33 @@ const getProducts = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
 
     let condition = {}
     
+    await db.connect();
+    
     if ( gender !== 'all' && SHOP_CONSTANTS.validGenders.includes(`${gender}`) ) {
         condition = { gender };
     }   
 
-    await db.connect();
 
-    const products = await Product.find(condition)
+    try {
+        const products = await Product.find(condition)
                                 .select('title images price inStock slug -_id') //indico qué datos de la informacion quiero, y resto el "_id"
                                 .lean();
 
-    await db.disconnect();
-
-    const updatedProducts = products.map ( product => {
-        product.images = product.images.map ( image => {
-            return image.includes('http') ? image : `${ process.env.HOST_NAME }products/${ image }`
-        }); 
+        const updatedProducts = products.map ( product => {
+            product.images = product.images.map ( image => {
+                return image.includes('http') ? image : `${ process.env.HOST_NAME }products/${ image }`
+            }); 
 
         return product;
-    });
+         })
 
-    return res.status(200).json( updatedProducts );
+         return res.status(200).json( updatedProducts );
+
+    } catch (error) {
+        throw error;
+    }finally{
+        await db.disconnect();
+    }
+
 
 }

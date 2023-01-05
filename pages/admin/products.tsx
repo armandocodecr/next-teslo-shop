@@ -7,25 +7,7 @@ import useSWR from 'swr';
 
 import { AdminLayout } from '../../components/layouts'
 import { IProduct } from '../../interfaces';
-import { tesloApi } from '../../api';
 
-
-const onDeleteProduct = async ( id: string ) => {
-
-    try {
-        
-        const { data } = await tesloApi({
-            url: '/admin/products',
-            method: 'DELETE',
-            data: id,
-        })
-
-        //router.replace('/admin/products');
-
-    } catch (error) {
-        console.log(error)
-    }
-}
 
 const columns:GridColDef[] = [
     { 
@@ -47,7 +29,7 @@ const columns:GridColDef[] = [
         field: 'title', headerName: 'Título', width: 300,
          renderCell:( { row }: GridValueGetterParams ) => {
             return (
-                <NextLink href={`/admin/products/${ row.slug }`} passHref>
+                <NextLink href={`/admin/products/${ row.slug }`} passHref legacyBehavior>
                     <Link underline='always'>
                         { row.title }
                     </Link>

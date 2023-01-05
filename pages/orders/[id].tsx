@@ -176,10 +176,6 @@ const OrderPage: NextPage<Props> = ({ order }) => {
   )
 }
 
-// You should use getServerSideProps when:
-// - Only if you need to pre-render a page whose data must be fetched at request time
-
-
 export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
     const { id= '' } = query;
     const session:any = await getSession({ req });
@@ -192,7 +188,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }) => 
             }
         }
     }
-
+    console.log(session)
     const order = await dbOrders.getOrderById( id.toString() );
 
     if( !order ){ // Verificamos que la orden sea de esa persona

@@ -50,7 +50,12 @@ const getProducts = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 
     const products = await Product.find().sort({ title: 'asc' }).lean();
 
-    await db.disconnect
+    if( !products ){
+        await db.disconnect();
+        return null;
+    }
+
+    await db.disconnect();
 
     const updatedProducts = products.map ( product => {
         product.images = product.images.map ( image => {

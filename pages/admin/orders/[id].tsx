@@ -15,19 +15,13 @@ interface Props {
 
 const OrderPage: NextPage<Props> = ({ order }) => {
 
+    if( !order ) return (<></>);
+    
     const { shippingAddress } = order;
 
 
   return (
     <AdminLayout title='Resumen de la orden' subTitle={`Orden ID: ${ order._id }`} icon={ <ConfirmationNumberOutlined /> }>
-
-        {/* <Chip 
-            sx={{ my: 2 }}
-            label='Pendiente de pago'
-            variant='outlined'
-            color='error'
-            icon={ <CreditCardOffOutlined /> }
-        /> */}
 
         {
             order.isPaid
@@ -121,22 +115,7 @@ const OrderPage: NextPage<Props> = ({ order }) => {
   )
 }
 
-// You should use getServerSideProps when:
-// - Only if you need to pre-render a page whose data must be fetched at request time
-
-
 export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
-    
-    //  const session:any = await getSession({ req }); ***NO ES NECESARIO PORQUE YA LO VALIDAMOS CON EL MIDDLEWARE
-
-    // if( !session ){
-    //     return {
-    //         redirect: {
-    //             destination: `/auth/login?p=/orders/${ id }`,
-    //             permanent: false,
-    //         }
-    //     }
-    // }
 
     const { id= '' } = query;
     const order = await dbOrders.getOrderById( id.toString() );

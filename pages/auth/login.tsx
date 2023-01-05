@@ -8,7 +8,6 @@ import { Box, Button, Chip, Grid, Link, TextField, Typography, Divider } from '@
 import { ErrorOutline } from '@mui/icons-material';
 import { useForm } from 'react-hook-form';
 
-// import { AuthContext } from '../../context';
 import { AuthLayout } from '../../components/layouts'
 import { validation } from '../../utils';
 
@@ -29,7 +28,6 @@ const LoginPage = () => {
     
     useEffect(() => {
         getProviders().then( prov => {
-            // console.log(prov)
             setProviders(prov)
         } )
     }, [])
@@ -40,18 +38,6 @@ const LoginPage = () => {
         setShowError(false);
 
         await signIn( 'credentials', { email, password } );
-
-        // const isValidLogin = await loginUser( email, password )
-
-        // if ( !isValidLogin ) {
-        //     setShowError(true);
-        //     setTimeout( () => { setShowError(false) }, 3000 )
-        //     return;
-        // }
-
-        // const destination = router.query.p?.toString() || '/'
-        // //Esto se hace para saber en qué pagina estaba la persona al cerrar sección, para que cuando e vuelva logear aparezca en la misma.
-        // router.replace(destination)
 
     }
 

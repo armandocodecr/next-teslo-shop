@@ -26,6 +26,12 @@ const getOrders = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
         .sort({ createdAt: 'desc' })
         .populate('user', 'name email') //indicamos la referencia de usuarios y el esquema de usuarios, para que me traiga unicamente el 'name email'
         .lean();
+
+    if( !orders ){
+        await db.disconnect();
+        return null;
+    }
+
     await db.disconnect();
 
     return res.status(200).json( orders );

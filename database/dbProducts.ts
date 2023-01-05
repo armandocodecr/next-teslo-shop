@@ -10,15 +10,16 @@ export const getProductBySlug = async( slug: string ): Promise<IProduct | null> 
 
     const product = await Product.findOne({slug}).lean();
 
-    await db.disconnect()
-
     if ( !product ) {
+        //await db.disconnect();
         return null;
     }
-
+    
     product.images = product.images.map ( image => {
         return image.includes('http') ? image : `${ process.env.HOST_NAME }products/${ image }`
     } ); 
+    
+    await db.disconnect()
 
     return JSON.parse( JSON.stringify( product ) );
 

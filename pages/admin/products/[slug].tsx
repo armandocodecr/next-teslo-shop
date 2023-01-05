@@ -95,7 +95,6 @@ const ProductAdminPage:FC<Props> = ({ product, slug }) => {
                  const formData = new FormData();
                  formData.append('file', file);
                  const { data } = await tesloApi.post<{ message: string }>('/admin/upload', formData);
-                 console.log( data.message );
                  setValue( 'images', [...getValues('images'), data.message ], { shouldValidate: true } )
             }
 
@@ -147,8 +146,6 @@ const ProductAdminPage:FC<Props> = ({ product, slug }) => {
                 method: form._id ? 'PUT' : 'POST', // si tenemos un _id entonces actualizar, si no crear
                 data: form
             })
-
-            console.log(form._id);
 
             if( form._id === undefined ) {
                 Swal.fire({
@@ -496,9 +493,6 @@ const ProductAdminPage:FC<Props> = ({ product, slug }) => {
         </AdminLayout>
     )
 }
-
-// You should use getServerSideProps when:
-// - Only if you need to pre-render a page whose data must be fetched at request time
 
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {

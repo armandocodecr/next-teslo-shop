@@ -43,16 +43,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         lowInventory,
         notPaidOrders: numberOfOrders - paidOrders
     })
-    
-    // switch ( req.method ){
-    //     case 'GET':
-    //         return getData(req, res);
 
-    // }
 }   
-
-// const getData = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
-
-    
-
-// }
