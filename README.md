@@ -26,4 +26,6 @@ Esto lo aclaro ya que no es un problema de desarrollo si no del timeout que tien
 dominiox ante las serverless functions, y actualmente no tengo la posibilidad de pagar
 un dominio para ya poder hacer uso de ellas en la nube.
 
+El dominio es el siguiente: https://next-teslo-shop-2023.vercel.app/
+
 ## Un saludo.
