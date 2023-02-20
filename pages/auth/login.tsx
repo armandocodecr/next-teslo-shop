@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import NextLink from 'next/link'
 import { GetServerSideProps } from 'next'
 import { getSession, signIn, getProviders } from 'next-auth/react';
@@ -31,10 +31,8 @@ const LoginPage = () => {
             setProviders(prov)
         } )
     }, [])
-    
 
     const onLoginUser = async( { email, password }: FormData ) => {
-       
         setShowError(false);
 
         await signIn( 'credentials', { email, password } );

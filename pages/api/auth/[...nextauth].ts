@@ -1,6 +1,6 @@
 import NextAuth from "next-auth"
 import GithubProvider from 'next-auth/providers/github';
-import Credentials from 'next-auth/providers/credentials';
+import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from "next-auth/providers/google";
 
 import { dbUsers } from '../../../database';
@@ -16,7 +16,7 @@ export default NextAuth({
 
   providers: [
 
-    Credentials({
+    CredentialsProvider({
       name: 'Custom login',
       credentials: {
         email: { label: 'Correo:', type: 'email', placeholder: 'Ingresa tu correo' },
@@ -59,7 +59,7 @@ export default NextAuth({
   //Callbacks
 
   jwt: {
-    // secret: process.env.JWT_SECRET_SEED, // deprecated
+    // secret: process.env.SECRET, // deprecated
   },
 
 
