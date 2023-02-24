@@ -4,7 +4,7 @@ import { GetServerSideProps } from 'next'
 import { getSession, signIn, getProviders } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
-import { Box, Button, Chip, Grid, Link, TextField, Typography, Divider } from '@mui/material';
+import { Box, Button, Grid, Link, TextField, Typography, Divider } from '@mui/material';
 import { ErrorOutline } from '@mui/icons-material';
 import { useForm } from 'react-hook-form';
 
@@ -48,13 +48,13 @@ const LoginPage = () => {
                     <Grid item xs={12}>
                         <Typography variant='h1' component='h1'display='flex' justifyContent='center' > Iniciar sección </Typography>
 
-                        <Chip 
+                        {/* <Chip 
                             label='No conocemos ese correo / contraseña'
                             color='error'
                             icon={ <ErrorOutline /> }
                             className='fadeIn'
                             sx={{ mt: 1, display: showError ? 'flex' : 'none' }}
-                        />
+                        /> */}
 
                     </Grid>
 
