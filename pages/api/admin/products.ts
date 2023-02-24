@@ -95,7 +95,6 @@ const updatedProducts = async (res: NextApiResponse<Data>, req: NextApiRequest) 
             if( !images.includes(image) ){
                 //Borrar de Cloudinary
                 const [ fileId, extension ] = image.substring(  image.lastIndexOf('/') + 1 ).split('.'); //Buscamos la posición índice del último "/", sumamos 1 porque quiero eliminar también el "/"
-                console.log({ image, fileId, extension });
                 await cloudinary.uploader.destroy( fileId ); //Eliminamos la imagen del repositorio
             }
         } );

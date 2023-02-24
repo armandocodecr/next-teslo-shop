@@ -156,8 +156,6 @@ const OrderPage: NextPage<Props> = ({ order }) => {
                                             onApprove={(data, actions) => {
                                                 return actions.order!.capture().then((details) => {
                                                     onOrderCompleted(details);
-                                                    // console.log({ details })
-                                                    // const name = details.payer.name!.given_name;
                                                 });
                                             }}
                                         />
@@ -188,7 +186,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }) => 
             }
         }
     }
-    console.log(session)
+
     const order = await dbOrders.getOrderById( id.toString() );
 
     if( !order ){ // Verificamos que la orden sea de esa persona

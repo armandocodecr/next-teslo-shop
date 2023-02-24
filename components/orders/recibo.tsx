@@ -77,7 +77,7 @@ interface Props {
 }
 
 const Recibo = ( { infoReceipt }: Props ) => {
-    console.log(infoReceipt)
+
     return (
         <Document>
             <Page size="A4">

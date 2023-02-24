@@ -39,7 +39,6 @@ const parseFiles = async ( req: NextApiRequest ): Promise<string> => {
         
         const form = new formidable.IncomingForm(); //Preparamos eol objeto de formidable para analizar lo que viene del form
         form.parse( req, async( error, fields, files ) => {
-            //console.log({error, fields, files});
 
             if( error ) {
                 return reject(error);
