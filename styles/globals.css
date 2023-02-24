@@ -33,3 +33,28 @@
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
 }
+
+
+/* History Orders */
+
+.contenedor-pdf {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  z-index: 900;
+  width: 80%;
+  height: 90%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid #000;
+}
+
+#btn-contenedor-pdf{
+  color: white;
+  background-color: red;
+  padding: 5px;
+  font-size: 12px;
+  font-weight: bolder;
+}

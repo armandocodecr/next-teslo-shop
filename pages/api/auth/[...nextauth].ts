@@ -5,39 +5,39 @@ import GoogleProvider from "next-auth/providers/google";
 
 import { dbUsers } from '../../../database';
 
+declare module "next-auth" {
+  interface Session {
+    accessToken?: string;
+  }
+}
 
 export default NextAuth({
-
-  session: {
-    maxAge: 2592000, //30d durará la session
-    strategy: 'jwt',
-    updateAge: 86400, //cada dia se va a actualizar
-  },
 
   providers: [
 
     CredentialsProvider({
       name: 'Custom login',
+      type: 'credentials',
       credentials: {
         email: { label: 'Correo:', type: 'email', placeholder: 'Ingresa tu correo' },
         password: { label: 'Contraseña:', type: 'password', placeholder: 'Ingresa tu contraseña' },
       },
 
-      async authorize(credentials: any) {
+      async authorize(credentials) {
 
-      return await dbUsers.checkUserEmailPassword( credentials!.email, credentials!.password );
+        return await dbUsers.checkUserEmailPassword( credentials!.email, credentials!.password );
 
       }
     }),
 
     GithubProvider({
-      clientId: process.env.GITHUB_ID!,
-      clientSecret: process.env.GITHUB_SECRET!,
+      clientId: process.env.GITHUB_ID || '',
+      clientSecret: process.env.GITHUB_SECRET || '',
     }),
 
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      clientId: process.env.GOOGLE_CLIENT_ID || '',
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
       authorization: {
         params: {
           prompt: "consent",
@@ -56,12 +56,13 @@ export default NextAuth({
     newUser: '/auth/register'
   },
 
-  //Callbacks
-
-  jwt: {
-    // secret: process.env.SECRET, // deprecated
+  session: {
+    maxAge: 2592000, //30d durará la session
+    strategy: 'jwt',
+    updateAge: 86400, //cada dia se va a actualizar
   },
 
+  //Callbacks
 
 
   callbacks: {
@@ -73,13 +74,12 @@ export default NextAuth({
 
         switch( account.type ) {
 
-          case 'oauth':
-            token.user = await dbUsers.oAuthToDbUser( user?.email || '', user?.name || '' );
-          break;
-
           case 'credentials':
             token.user = user;
-            
+          break;
+
+          case 'oauth':
+            token.user = await dbUsers.oAuthToDbUser( user?.email || '', user?.name || '' );
           break;
 
         }
@@ -91,8 +91,8 @@ export default NextAuth({
     //Primero se genera el jwt y luego este es pasado a la session
 
     async session({ session, token, user }){
-
-      session.accessToken = token.accessToken;
+      
+      session.accessToken = token.accessToken as any;
       session.user = token.user as any;
 
       return session;

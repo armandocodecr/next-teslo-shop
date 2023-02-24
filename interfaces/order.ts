@@ -46,3 +46,25 @@ export interface ShippingAddress {
     country  : string;
     phone    : string;
 }
+
+export const defaultOrder: IOrder = {
+    _id: '',
+    orderItems: [],
+    shippingAddress: {
+      firstName: '',
+      lastName: '',
+      address: '',
+      city: '',
+      zip: '',
+      country: '',
+      phone: ''
+    },
+
+    createdAt: '',
+
+    numberOfItems: 0,
+    subTotal: 0,
+    tax: 0,
+    total: 0,
+    isPaid: false
+  };

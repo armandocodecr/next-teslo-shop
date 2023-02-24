@@ -36,27 +36,6 @@ export const AuthProvider: FC<Props> = ({ children }) => {
     }, [status, data])
     
 
-    // useEffect(() => {
-    //     checkToken();
-
-    // }, [])
-
-    // const checkToken = async() => {
-
-    //     if( !Cookies.get('token') ) return;
-
-    //     try {
-    //         const { data } = await tesloApi.get('/user/validate-token');
-    //         const { token, user } = data;
-    //         Cookies.set('token', token);
-    //         dispatch({ type: '[Auth] - Login', payload: user });
-    //     } catch (error) {
-    //         Cookies.remove('token');
-    //     }
-
-    // }
-    
-
     const loginUser = async( email: string, password: string ): Promise<boolean> => {
 
         try {
@@ -120,8 +99,6 @@ export const AuthProvider: FC<Props> = ({ children }) => {
 
         signOut();
 
-        // router.reload();
-        // Cookies.remove('token');
     }
 
     return (

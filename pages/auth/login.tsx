@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import NextLink from 'next/link'
 import { GetServerSideProps } from 'next'
 import { getSession, signIn, getProviders } from 'next-auth/react';
