@@ -7,7 +7,7 @@ import {
     StyleSheet
 } from '@react-pdf/renderer'
 import { formatDate } from '../../utils';
-import { IOrder } from '../../interfaces';
+import { IOrder, StylePDF } from '../../interfaces';
 
 const COL_ANCHO_1 = 10;
 const COL_ANCHO_2 = 20;
@@ -72,11 +72,11 @@ const styles = StyleSheet.create({
     },
 })
 
-interface Props {
-    infoReceipt: IOrder
-}
+// interface Props {
+//     infoReceipt: IOrder
+// }
 
-const Recibo = ( { infoReceipt }: Props ) => {
+const Recibo = ( { infoReceipt }) => {
 
     return (
         <Document>
@@ -133,13 +133,13 @@ const Recibo = ( { infoReceipt }: Props ) => {
                         </View>
                         <View style={{ flex: 1 }}>
                             <Text style={{ fontSize: "12px", fontWeight: "bold" }}>
-                                Fecha de Emisión: { formatDate(infoReceipt.createdAt!) }
+                                Fecha de Emisión: { formatDate(infoReceipt.createdAt) }
                             </Text>
                             <Text style={{ fontSize: "12px", fontWeight: "bold" }}>Fecha de vencimiento: PAGO ONLINE</Text>
                             <Text style={{ fontSize: "12px", fontWeight: "bold" }}>Impuesto sobre el total de la venta: 13%</Text>
                         </View>
                     </View>
-                    <View style={styles.tabla}>
+                    <View style={ styles.tabla }>
                         <View style={styles.tablaFila}>
                             <View style={styles.tablaColumna1}>
                                 <Text style={styles.tablaCeldaHeader}>ITEM</Text>
