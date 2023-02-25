@@ -72,9 +72,14 @@ const HistoryPage: NextPage<Props> = ({ orders }) => {
             renderCell: (params: GridValueGetterParams) => {
                 const order = params.row.orderComplete
                 return (
+                    order.isPaid ? (
                         <button onClick={() => showReceipt(order) } style={{ cursor: "pointer" }}>
                             Ver recibo
                         </button>
+                    )
+                    : (
+                        <p>Pendiente de pago...</p>
+                    )
                 )
             }
         }
