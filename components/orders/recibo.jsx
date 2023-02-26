@@ -3,78 +3,10 @@ import {
     Page,
     View,
     Image,
-    Text,
-    StyleSheet
+    Text
 } from '@react-pdf/renderer'
-import { formatDate } from '../../utils';
-import { IOrder, StylePDF } from '../../interfaces';
 
-const COL_ANCHO_1 = 10;
-const COL_ANCHO_2 = 20;
-
-const styles = StyleSheet.create({
-    tabla: {
-        display: "table",
-        width: "auto",
-        borderStyle: "solid",
-        borderColor: "#000",
-        borderWidth: 1,
-        borderRightWidth: 0,
-        borderBottomWidth: 0,
-        marginTop: 20
-    },
-    tablaFila: {
-        margin: "auto",
-        flexDirection: "row"
-    },
-    tablaColumna1: {
-        width: COL_ANCHO_1 + "%",
-        borderStyle: "solid",
-        borderColor: "#000",
-        borderBottomColor: "#000",
-        borderWidth: 1,
-        borderLeftWidth: 0,
-        borderTopWidth: 0,
-    },
-    tablaColumna2: {
-        width: COL_ANCHO_2 + "%",
-        borderStyle: "solid",
-        borderColor: "#000",
-        borderBottomColor: "#000",
-        borderWidth: 1,
-        borderLeftWidth: 0,
-        borderTopWidth: 0,
-    },
-    tablaCeldaHeader: {
-        margin: 5,
-        fontSize: 10,
-        fontWeight: 500,
-    },
-    anchoColumna1: {
-        width: COL_ANCHO_1 + "%",
-        borderStyle: "solid",
-        borderColor: "#000",
-        borderWidth: 1,
-        borderLeftWidth: 0,
-        borderTopWidth: 0,
-    },
-    anchoColumna2: {
-        width: COL_ANCHO_2 + "%",
-        borderStyle: "solid",
-        borderColor: "#000",
-        borderWidth: 1,
-        borderLeftWidth: 0,
-        borderTopWidth: 0,
-    },
-    tablaCelda: {
-        margin: 5,
-        fontSize: 10,
-    },
-})
-
-// interface Props {
-//     infoReceipt: IOrder
-// }
+import { formatDate, stylesPDF } from '../../utils';
 
 const Recibo = ( { infoReceipt }) => {
 
@@ -139,48 +71,48 @@ const Recibo = ( { infoReceipt }) => {
                             <Text style={{ fontSize: "12px", fontWeight: "bold" }}>Impuesto sobre el total de la venta: 13%</Text>
                         </View>
                     </View>
-                    <View style={ styles.tabla }>
-                        <View style={styles.tablaFila}>
-                            <View style={styles.tablaColumna1}>
-                                <Text style={styles.tablaCeldaHeader}>ITEM</Text>
+                    <View style={ stylesPDF.tabla }>
+                        <View style={stylesPDF.tablaFila}>
+                            <View style={stylesPDF.tablaColumna1}>
+                                <Text style={stylesPDF.tablaCeldaHeader}>ITEM</Text>
                             </View>
-                            <View style={styles.tablaColumna1}>
-                                <Text style={styles.tablaCeldaHeader}>CANTIDAD</Text>
+                            <View style={stylesPDF.tablaColumna1}>
+                                <Text style={stylesPDF.tablaCeldaHeader}>CANTIDAD</Text>
                             </View>
-                            <View style={styles.tablaColumna2}>
-                                <Text style={styles.tablaCeldaHeader}>ID DEL PRODUCTO   </Text>
+                            <View style={stylesPDF.tablaColumna2}>
+                                <Text style={stylesPDF.tablaCeldaHeader}>ID DEL PRODUCTO   </Text>
                             </View>
-                            <View style={styles.tablaColumna2}>
-                                <Text style={styles.tablaCeldaHeader}>UNIDAD</Text>
+                            <View style={stylesPDF.tablaColumna2}>
+                                <Text style={stylesPDF.tablaCeldaHeader}>UNIDAD</Text>
                             </View>
-                            <View style={styles.tablaColumna2}>
-                                <Text style={styles.tablaCeldaHeader}>PRECIO UNITARIO</Text>
+                            <View style={stylesPDF.tablaColumna2}>
+                                <Text style={stylesPDF.tablaCeldaHeader}>PRECIO UNITARIO</Text>
                             </View>
-                            <View style={styles.tablaColumna2}>
-                                <Text style={styles.tablaCeldaHeader}>IMPORTE TOTAL</Text>
+                            <View style={stylesPDF.tablaColumna2}>
+                                <Text style={stylesPDF.tablaCeldaHeader}>IMPORTE TOTAL</Text>
                             </View>
                         </View>
                         
                         {
                             infoReceipt.orderItems.map( (order, index) => (
-                                <View style={styles.tablaFila} key={ order._id }>
-                                    <View style={styles.anchoColumna1}>
-                                        <Text style={styles.tablaCelda}>{ index + 1 }</Text>
+                                <View style={stylesPDF.tablaFila} key={ order._id }>
+                                    <View style={stylesPDF.anchoColumna1}>
+                                        <Text style={stylesPDF.tablaCelda}>{ index + 1 }</Text>
                                     </View>
-                                    <View style={styles.anchoColumna1}>
-                                        <Text style={styles.tablaCelda}>{ order.quantity }</Text>
+                                    <View style={stylesPDF.anchoColumna1}>
+                                        <Text style={stylesPDF.tablaCelda}>{ order.quantity }</Text>
                                     </View>
-                                    <View style={styles.anchoColumna2}>
-                                        <Text style={styles.tablaCelda}>{ order._id }</Text>
+                                    <View style={stylesPDF.anchoColumna2}>
+                                        <Text style={stylesPDF.tablaCelda}>{ order._id }</Text>
                                     </View>
-                                    <View style={styles.anchoColumna2}>
-                                        <Text style={styles.tablaCelda}> { order.title } </Text>
+                                    <View style={stylesPDF.anchoColumna2}>
+                                        <Text style={stylesPDF.tablaCelda}> { order.title } </Text>
                                     </View>
-                                    <View style={styles.anchoColumna2}>
-                                        <Text style={styles.tablaCelda}>{ order.price }</Text>
+                                    <View style={stylesPDF.anchoColumna2}>
+                                        <Text style={stylesPDF.tablaCelda}>{ order.price }</Text>
                                     </View>
-                                    <View style={styles.anchoColumna2}>
-                                        <Text style={styles.tablaCelda}>
+                                    <View style={stylesPDF.anchoColumna2}>
+                                        <Text style={stylesPDF.tablaCelda}>
                                             { order.quantity * order.price }
                                         </Text>
                                     </View>

@@ -16,6 +16,6 @@
     "incremental": true,
     "downlevelIteration": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/orders/recibo.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/orders/recibo.jsx", "utils/stylesPDF.js"],
   "exclude": ["node_modules"]
 }
