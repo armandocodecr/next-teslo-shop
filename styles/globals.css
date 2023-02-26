@@ -58,3 +58,18 @@
   font-size: 12px;
   font-weight: bolder;
 }
+
+#btn-recibo-pdf{
+  width: 50%;
+  cursor: pointer;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid #274494;
+  color: #274494;
+  background-color: white;
+  transition: transform .1s ease-in-out;
+}
+
+#btn-recibo-pdf:hover{
+  transform: scale(1.1); 
+}

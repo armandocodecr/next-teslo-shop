@@ -73,7 +73,7 @@ const HistoryPage: NextPage<Props> = ({ orders }) => {
                 const order = params.row.orderComplete
                 return (
                     order.isPaid ? (
-                        <button onClick={() => showReceipt(order) } style={{ cursor: "pointer" }}>
+                        <button onClick={() => showReceipt(order) } id='btn-recibo-pdf'>
                             Ver recibo
                         </button>
                     )
