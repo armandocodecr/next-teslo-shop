@@ -115,7 +115,12 @@ const HistoryPage: NextPage<Props> = ({ orders }) => {
                     <button id='btn-contenedor-pdf' onClick={ () => setVerRecibo(false) }>
                         Cerrar comprobante
                     </button>
-                    <PDFViewer style={{ width: "100%", height: "100vh" }}>
+                    <PDFViewer style={{ 
+                        width: "100%", 
+                        height: "100vh", 
+                        border: "1px solid #000" 
+                        }}
+                    >
                         <Recibo infoReceipt={infoReceipt!} />
                     </PDFViewer>
                 </div>
