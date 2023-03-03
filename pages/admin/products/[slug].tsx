@@ -1,36 +1,22 @@
-import { ChangeEvent, FC, useEffect, useRef, useState } from 'react'
+import { FC, useRef, useState } from 'react'
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 
 import { DriveFileRenameOutline, SaveOutlined, UploadOutlined } from '@mui/icons-material';
-import { Box, Button, capitalize, Card, CardActions, CardMedia, Checkbox, Chip, Divider, FormControl, FormControlLabel, FormGroup, FormHelperText, FormLabel, Grid, Radio, RadioGroup, TextField } from '@mui/material';
+
+import { Box, Button, capitalize, Card, CardActions, CardMedia, 
+        Checkbox, Chip, Divider, FormControl, FormControlLabel, FormGroup, 
+        FormHelperText, FormLabel, Grid, Radio, RadioGroup, TextField } from '@mui/material';
 import Swal from 'sweetalert2';
 
-import { IProduct } from '../../../interfaces';
+import { useFilesAndTags } from '../../../hooks';
+import { windowsDeleteConfirmation } from '../../../services';
+import { IProduct, validTypes, validGender, validSizes } from '../../../interfaces';
 import { AdminLayout } from '../../../components/layouts'
 import { dbProducts } from '../../../database';
 import tesloApi from '../../../api/tesloApi';
 import { Product } from '../../../models';
-
-
-const validTypes  = ['shirts','pants','hoodies','hats']
-const validGender = ['men','women','kid','unisex']
-const validSizes = ['XS','S','M','L','XL','XXL','XXXL']
-
-interface formData {
-    _id         : string;
-    description : string;
-    images      : string[];
-    inStock     : number;
-    price       : number;
-    sizes       : string[];
-    slug        : string;
-    tags        : string[];
-    title       : string;
-    type        : string;
-    gender      : string;
-}
 
 interface Props {
     product: IProduct;
@@ -40,102 +26,17 @@ interface Props {
 const ProductAdminPage:FC<Props> = ({ product, slug }) => {
 
     const router = useRouter();
-    const [newTagValue, setNewTagValue] = useState('');
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [isSaving, setIsSaving] = useState(false)
     
-    const { register, handleSubmit, formState:{ errors }, getValues, setValue, control, watch } = useForm<formData>({
-        //getValues nos devuelve lo que generó el form
-        //watch nos permite oberservar los cambios ya sea en un input o un formulario como tal
-        defaultValues: product
-    })
+    const { handleSubmit, register, 
+            onDeleteImage, onFileSelected, 
+            onDeleteTag, onNewTag,
+            errors, control,
+            setNewTagValue, newTagValue,
+            getValues, } = useFilesAndTags(product);
 
-    useEffect(() => {
-        const subscription = watch(( value, { name, type } )  => {
-            if( name === 'title' ) {
-                const newSlug = value.title?.trim()
-                            .replaceAll(' ', '_')
-                            .replaceAll("'", '')
-                            .toLocaleLowerCase() || '';
-
-                setValue('slug', newSlug)
-            }
-        } )
-    
-      return () => subscription.unsubscribe(); //Utilizaremos este return para destruir el watch, ya que el siempre está escuchando aunque nos salgamos de la pantalla
-        
-    }, [watch, setValue]) //El watch hay ponerlo como dependencia aunque no cambie
-    
-    const onNewTag = () => {
-        const newTag = newTagValue.trim().toLocaleLowerCase();
-        setNewTagValue('');
-        const tagsValue = getValues('tags');
-
-        if( newTag === '' || tagsValue.includes(newTag) ){
-            return;
-        }
-
-        setValue('tags', [ ...tagsValue, newTag ])
-
-    }
-
-    const onDeleteTag = ( tag: string ) => {
-        const updatedTags = getValues('tags').filter( (val) => val !== tag );
-        setValue('tags', updatedTags, { shouldValidate: true });
-    }
-
-    const onFileSelected = async ({ target }: ChangeEvent<HTMLInputElement> ) => {
-        if( !target.files || target.files.length === 0 ){
-            return;
-        }
-
-        try {
-
-            for( const file of target.files ) {
-                 const formData = new FormData();
-                 formData.append('file', file);
-                 const { data } = await tesloApi.post<{ message: string }>('/admin/upload', formData);
-                 setValue( 'images', [...getValues('images'), data.message ], { shouldValidate: true } )
-            }
-
-        } catch (error) {
-            console.log(error)
-        }
-
-    }
-
-    const onDeleteImage = ( image: string ) => {
-         setValue( 
-            'images', getValues('images').filter( img => img !== image ),
-            { shouldValidate: true }
-          );
-    }
-
-    const onDeleteProduct = async ( id: string, imagenes: string[] ) => {
-
-        const dataProduct = {
-            id,
-            images: imagenes
-        }
-
-        try {
-            
-            const { data } = await tesloApi({
-                url: '/admin/products',
-                method: 'DELETE',
-                data: dataProduct,
-            })
-    
-            router.replace('/admin/products');
-    
-        } catch (error) {
-            console.log(error)
-        }
-
-    }
-
-
-    const onSubmit = async ( form: formData ) => {
+    const onSubmit = async ( form: IProduct ) => {
         
         if( form.images.length < 2 ) return alert('Mínimos 2 imagenes');
         setIsSaving(true);
@@ -155,7 +56,7 @@ const ProductAdminPage:FC<Props> = ({ product, slug }) => {
                     showConfirmButton: false,
                     timer: 1500
                   })
-                router.replace(`/icecream/${ form.slug }`);
+                router.replace(`/admin/products/${ form.slug }`);
                 setIsSaving(false);
             }else{
                 Swal.fire({
@@ -173,35 +74,6 @@ const ProductAdminPage:FC<Props> = ({ product, slug }) => {
             setIsSaving(false);
         }
 
-    }
-
-    const windowsDeleteConfirmation = ( id: string, images: string[] ) => {
-        Swal.fire({
-            title: '¿Estás seguro/a de eliminar este producto?',
-            text: "¡Después de confirmar no habrá vuelta atrás!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, bórralo!',
-            cancelButtonText: ' Cencelar'
-          }).then((result) => {
-            if (result.isConfirmed) {
-              Swal.fire(
-                '¡Eliminado!',
-                'Este producto ha sido eliminado.',
-                'success'
-              )
-              onDeleteProduct( id, images );
-              Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Producto eliminado correctamente',
-                showConfirmButton: false,
-                timer: 1500
-              })
-            }
-          })
     }
 
     return (
@@ -229,7 +101,7 @@ const ProductAdminPage:FC<Props> = ({ product, slug }) => {
                                 startIcon={ <SaveOutlined /> }
                                 sx={{ width: '150px', mr: 2 }}
                                 type="button"
-                                onClick={ () => windowsDeleteConfirmation( product._id, product.images ) }
+                                onClick={ () => windowsDeleteConfirmation( product._id, product.images, router ) }
                                 disabled={ isSaving }
                              >
                                  Eliminar
@@ -464,6 +336,7 @@ const ProductAdminPage:FC<Props> = ({ product, slug }) => {
                                         <Grid item xs={4} sm={3} key={img}>
                                             <Card>
                                                 <CardMedia 
+                                                    sx={{ mt: 2 }}
                                                     component='img'
                                                     className='fadeIn'
                                                     image={ img }
