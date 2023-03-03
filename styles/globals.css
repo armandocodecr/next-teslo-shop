@@ -69,8 +69,11 @@
   background-color: rgb(83, 83, 83);
 }
 
-#btn-recibo-pdf{
-  width: 50%;
+.btn-recibo-pdf{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
   cursor: pointer;
   height: 30px;
   border-radius: 5px;
@@ -80,6 +83,6 @@
   transition: transform .1s ease-in-out;
 }
 
-#btn-recibo-pdf:hover{
+.btn-recibo-pdf:hover{
   transform: scale(1.1); 
 }

@@ -5,12 +5,13 @@ import useSWR from 'swr';
 
 import { AdminLayout } from '../../components/layouts'
 import { IOrder, IUser } from '../../interfaces';
+import { formatDate } from '../../utils/formatDate.';
 
 const columns:GridColDef[] = [
     { field: 'id', headerName: 'Orden ID', width: 250 },
     { field: 'email', headerName: 'Correo', width: 250 },
     { field: 'name', headerName: 'Nombre completo', width: 300 },
-    { field: 'total', headerName: 'Monto total', width: 200 },
+    { field: 'total', headerName: 'Monto total', width: 120 },
     {
         field: 'isPaid',
         headerName: 'Pagada',
@@ -20,19 +21,25 @@ const columns:GridColDef[] = [
                 : <Chip variant='outlined' label='Pendiente' color='error' />
         }
     },
-    { field: 'inStock', headerName: 'No.Productos', align: 'center', width: 150 },
+    { field: 'inStock', headerName: 'No.Productos', align: 'center', width: 120 },
     {
         field: 'check',
         headerName: 'Ver orden',
+        width: 150,
         renderCell: ({ row }: GridValueGetterParams) => {
             return (
-                <a href={`/admin/orders/${ row.id }`} target="_blank" rel="noreferrer" >
-                    Ver orden
+                <a 
+                    href={`/admin/orders/${ row.id }`} 
+                    target="_blank" rel="noreferrer" 
+                    className='btn-recibo-pdf' 
+                    style={{ width: '150px', textDecoration: 'none' }}
+                >
+                     Ver orden
                 </a>
             )
         }
     },
-    { field: 'createdAt', headerName: 'Creada en', width: 300 },
+    { field: 'createdAt', headerName: 'Creada en', width: 200 },
 
 ]
 
@@ -46,10 +53,10 @@ const OrdersPage = () => {
         id: order._id,
         email: ( order.user as IUser ).email,
         name: ( order.user as IUser ).name,
-        total: order.total,
+        total: ` $ ${order.total}`,
         isPaid: order.isPaid,
         inStock: order.numberOfItems,
-        createdAt: order.createdAt
+        createdAt: formatDate(order.createdAt!.toString())
     }) );
 
   return (
