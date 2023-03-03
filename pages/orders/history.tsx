@@ -4,6 +4,7 @@ import NextLink from 'next/link'
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
 
 import { PDFViewer } from '@react-pdf/renderer';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
 import { ShopLayout } from '../../components/layouts'
 import { getSession } from 'next-auth/react';
@@ -73,8 +74,8 @@ const HistoryPage: NextPage<Props> = ({ orders }) => {
                 const order = params.row.orderComplete
                 return (
                     order.isPaid ? (
-                        <button onClick={() => showReceipt(order) } id='btn-recibo-pdf'>
-                            Ver recibo
+                        <button onClick={() => showReceipt(order) } className='btn-recibo-pdf'>
+                           <RemoveRedEyeIcon sx={{ fontSize: 20, mr: 0.5 }} /> Ver recibo
                         </button>
                     )
                     : (
