@@ -2,9 +2,9 @@ import NextLink from 'next/link'
 import { Box, Button, CardActionArea, CardMedia, Grid, Link, Typography } from '@mui/material';
 
 import { ItemCounter } from '../ui';
-import { FC, useContext } from 'react';
-import { CartContext } from '../../context/cart/CartContext';
+import { FC } from 'react';
 import { ICartProduct, IOrderItem } from '../../interfaces';
+import { useCart } from '../../hooks';
 
 interface Props {
     editable?: boolean;
@@ -13,12 +13,7 @@ interface Props {
 
 export const CartList: FC<Props> = ({ editable = false, products }) => {
 
-    const { cart, updatedCartQuantity, removeCartProduct } = useContext( CartContext );
-
-    const onNewCartQuantityValue = ( product: ICartProduct, newQuantityValue: number ) => {
-        product.quantity = newQuantityValue;
-        updatedCartQuantity( product );
-    };
+    const { cart, removeCartProduct, onNewCartQuantityValue } = useCart();
 
     const productsToShow = products ? products : cart;
 
