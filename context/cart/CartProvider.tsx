@@ -97,34 +97,26 @@ export const CartProvider: FC<Props> = ({ children }) => {
     
 
     const addProductToCart = ( product: ICartProduct ) => {
-        //! Primera solución
-            // dispatch({ type: '[Cart] - Add Product', payload: product })
+        const productInCart = state.cart.some( p => p._id === product._id ) //"Some" es lo mismo que filter solo que devuelve un booleano
+        if( !productInCart ) return dispatch({ type: '[Cart] - Update products in cart', payload: [ ...state.cart, product ] })
 
-         //! Segunda solución
-            // const productsInCart = state.cart.filter( p => p._id !== product._id && p.size !== product.size );
-            // dispatch({ type: '[Cart] - Add Product', payload: [...productsInCart, product] })
-
-          //! Tercera solución [Final]
-            const productInCart = state.cart.some( p => p._id === product._id ) //"Some" es lo mismo que filter solo que devuelve un booleano
-            if( !productInCart ) return dispatch({ type: '[Cart] - Update products in cart', payload: [ ...state.cart, product ] })
-
-            const productInCartButDifferentSize = state.cart.some( p => p._id === product._id && p.size === product.size );
-            if( !productInCartButDifferentSize ) return dispatch({ type: '[Cart] - Update products in cart', payload: [ ...state.cart, product ] })
+        const productInCartButDifferentSize = state.cart.some( p => p._id === product._id && p.size === product.size );
+        if( !productInCartButDifferentSize ) return dispatch({ type: '[Cart] - Update products in cart', payload: [ ...state.cart, product ] })
 
             //Acumular
 
-            const updatedProducts = state.cart.map( p => {
-                if( p._id !== product._id ) return p;
-                if( p.size !== product.size ) return p;
+        const updatedProducts = state.cart.map( p => {
+            if( p._id !== product._id ) return p;
+            if( p.size !== product.size ) return p;
 
                 // Actualizar la cantidad
 
-                p.quantity += product.quantity;
+            p.quantity += product.quantity;
 
-                return p;
-            });
+            return p;
+        });
 
-            dispatch({ type: '[Cart] - Update products in cart', payload: updatedProducts })
+        dispatch({ type: '[Cart] - Update products in cart', payload: updatedProducts })
 
     }
 
