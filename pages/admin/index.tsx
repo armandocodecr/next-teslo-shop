@@ -1,28 +1,13 @@
-import { useState, useEffect } from 'react';
-import useSWR from 'swr';
 import { AttachMoneyOutlined, CreditCardOffOutlined, CreditCardOutlined, DashboardOutlined, GroupOutlined, CategoryOutlined, CancelPresentationOutlined, ProductionQuantityLimitsOutlined, AccessTimeOutlined } from '@mui/icons-material';
 
 import { AdminLayout } from '../../components/layouts'
 import { Grid, Typography } from '@mui/material'
 import { SummaryTile } from '../../components/admin';
-import { DashboardSummaryResponse } from '../../interfaces';
+import { useDashboard } from '../../hooks';
 
 const Index = () => {
 
-    const { data, error } = useSWR<DashboardSummaryResponse>('/api/admin/dashboard',{
-        refreshInterval: 30 * 1000 //30 seg
-    });
-
-    const [refreshIn, setRefreshIn] = useState(30);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setRefreshIn( refreshIn => refreshIn > 0 ? refreshIn -1 : 30 );
-        }, 1000)
-      
-        return () => clearInterval(interval)
-    }, [])
-    
+    const { data, error, refreshIn } = useDashboard();
 
     if( !error && !data ){
         return <></>
