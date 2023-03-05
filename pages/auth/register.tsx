@@ -1,50 +1,27 @@
-import { useState, useContext } from 'react';
 import { useRouter } from 'next/router';
-import { getSession, signIn } from 'next-auth/react';
+import { getSession } from 'next-auth/react';
 import { GetServerSideProps } from 'next';
 import NextLink from 'next/link'
 
 import { Box, Button, Chip, Grid, Link, TextField, Typography } from '@mui/material'
 import { ErrorOutline } from '@mui/icons-material';
-import { useForm } from 'react-hook-form';
 
 
 import { AuthLayout } from '../../components/layouts'
 import { validation } from '../../utils';
-import { AuthContext } from '../../context';
-
-type FormData = {
-    name: string;
-    email: string;
-    password: string;
-  };
+import { useAuth } from '../../hooks';
 
 const RegisterPage = () => {
 
     const router = useRouter();
-    const { registerUser } = useContext(AuthContext)
-
-    const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
-    const [showError, setShowError] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
-
-
-    const onRegisterForm = async( { name, email, password }: FormData ) => {
-
-        setShowError(false);
-
-        const { hasError, message } = await registerUser( name, email, password );
-
-        if ( hasError ) {
-            setShowError(true);
-            setErrorMessage( message! )
-            setTimeout( () => { setShowError(false) }, 3000 )
-            return;
-        }
-
-        await signIn( 'credentials', { email, password } );
-
-    }
+    const { 
+        errors,
+        showError,
+        //Methods
+        register,
+        handleSubmit,
+        onRegisterForm, 
+        } = useAuth();
 
   return (
     <AuthLayout title='Ingresar'>

@@ -1,4 +1,8 @@
-import { AttachMoneyOutlined, CreditCardOffOutlined, CreditCardOutlined, DashboardOutlined, GroupOutlined, CategoryOutlined, CancelPresentationOutlined, ProductionQuantityLimitsOutlined, AccessTimeOutlined } from '@mui/icons-material';
+import { AttachMoneyOutlined, CreditCardOffOutlined, 
+    CreditCardOutlined, DashboardOutlined, GroupOutlined, 
+    CategoryOutlined, CancelPresentationOutlined, 
+    ProductionQuantityLimitsOutlined, AccessTimeOutlined 
+    } from '@mui/icons-material';
 
 import { AdminLayout } from '../../components/layouts'
 import { Grid, Typography } from '@mui/material'

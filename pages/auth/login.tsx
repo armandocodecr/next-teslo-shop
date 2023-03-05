@@ -1,43 +1,27 @@
-import { useEffect, useState } from 'react';
 import NextLink from 'next/link'
 import { GetServerSideProps } from 'next'
-import { getSession, signIn, getProviders } from 'next-auth/react';
+import { getSession, signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
 import { Box, Button, Chip, Grid, Link, TextField, Typography, Divider } from '@mui/material';
 import { ErrorOutline } from '@mui/icons-material';
-import { useForm } from 'react-hook-form';
 
 import { AuthLayout } from '../../components/layouts'
 import { validation } from '../../utils';
-
-type FormData = {
-    email: string,
-    password: string,
-  };
+import { useAuth } from '../../hooks';
 
 const LoginPage = () => {
 
-    const router = useRouter()
-    const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
-    //El register va a trabajar los texfield, los va a asociar y mantener, creando una realacion por ejemplo entre el email y el formulario
-    //cada que escriba los valores los va a mostrar en pantalla.
-    const [showError, setShowError] = useState(false);
-
-    const [providers, setProviders] = useState<any>({});
-    
-    useEffect(() => {
-        getProviders().then( prov => {
-            setProviders(prov)
-        } )
-    }, [])
-
-    const onLoginUser = async( { email, password }: FormData ) => {
-        setShowError(false);
-
-        await signIn( 'credentials', { email, password } );
-
-    }
+    const router = useRouter();
+    const { 
+        errors,
+        showError,
+        providers,
+        //Methods
+        register,
+        handleSubmit,
+        onLoginUser, 
+        } = useAuth();
 
   return (
     <AuthLayout title='Ingresar'>
