@@ -1,47 +1,18 @@
-import { useContext, useEffect, useState } from 'react';
 import NextLink from 'next/link'
-import Cookies from 'js-cookie';
-import { useRouter } from 'next/router';
 
 import { Card, CardContent, Grid, Typography, Divider, Box, Button, Link, Chip } from '@mui/material';
 
 import { CartList, OrderSummary } from '../../components/cart';
 import { ShopLayout } from '../../components/layouts'
-import { CartContext } from '../../context/cart/CartContext';
 import { countries } from '../../utils';
+import { useCart } from '../../hooks';
+import { useOrder } from '../../hooks';
 
 const SummaryPage = () => {
 
-    const router = useRouter();
-    const { shippingAddress, numberOfItems, createOrder } = useContext( CartContext );
+    const { shippingAddress, numberOfItems } = useCart();
 
-    const [isPosting, setIsPosting] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('')
-
-    useEffect(() => {
-//Este código es para verificar si hay una dirección colocada en las Cookies, ya que para esta pantalla es necesario
-
-        if( !Cookies.get('firstName') ) { 
-            router.push('/checkout/address')
-        }
-
-    }, [ router ]);
-
-    const onCreateOrder = async() => {
-        setIsPosting(true);
-
-        const { hasError, message } = await createOrder(); 
-
-        if ( hasError ) {
-            setIsPosting(false);
-            setErrorMessage( message );
-            return;
-        }
-
-        router.replace(`/orders/${message}`);
-
-    }
-    
+    const { isPosting, errorMessage, onCreateOrder } = useOrder();
 
     if ( !shippingAddress ) {
             return <></>;
