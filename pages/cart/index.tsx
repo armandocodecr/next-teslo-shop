@@ -5,10 +5,11 @@ import { CartContext } from '../../context';
 import { ShopLayout } from '../../components/layouts'
 import { CartList, OrderSummary } from '../../components/cart';
 import { useRouter } from 'next/router';
+import { useCart } from '../../hooks';
 
 const CartPage = () => {
 
-    const { isLoaded, cart } = useContext( CartContext );
+    const { isLoaded, cart } = useCart();
     const router = useRouter();
 
     useEffect(() => {
