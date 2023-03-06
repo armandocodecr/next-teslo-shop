@@ -1,55 +1,13 @@
-import { useContext } from 'react';
-import { useRouter } from "next/router";
 import { Box, Button, FormControl, Grid, MenuItem, TextField, Typography } from "@mui/material"
 import Cookies from "js-cookie";
 
-import { useForm } from 'react-hook-form';
 import { ShopLayout } from "../../components/layouts"
 import { countries } from "../../utils"
-import { CartContext } from '../../context/cart/CartContext';
-
-type FormData = {
-    firstName  : string;
-    lastName   : string;
-    address    : string;
-    address2?  : string;
-    zip        : string;
-    city       : string;
-    country    : string;
-    phone      : string;
-
-}
-
-const getAddressFromCookies = ():FormData => {
-    return {
-        firstName : Cookies.get('firstName') || '',
-        lastName  : Cookies.get('lastName') || '',
-        address   : Cookies.get('address') || '',
-        address2  : Cookies.get('address2') || '',
-        zip       : Cookies.get('zip') || '',
-        city      : Cookies.get('city') || '',
-        country   : Cookies.get('country') || '',
-        phone     : Cookies.get('phone') || '',
-    }
-}
-
+import { useAddress } from '../../hooks';
 
 const AddresPage = () => {
 
-    const router = useRouter();
-    const { updatedAddress } = useContext( CartContext )
-
-    const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>({
-        defaultValues: getAddressFromCookies(),
-    });
-
-    const onDirectionForm = ( data: FormData ) => {
-
-        updatedAddress( data );
-
-        router.push('/checkout/summary');
-
-    }
+    const {register, handleSubmit, errors, onDirectionForm} = useAddress();
 
   return (
     <ShopLayout title="Direccion" pageDescription="Confirmar direccion del destino">
