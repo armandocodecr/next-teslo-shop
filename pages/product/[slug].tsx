@@ -1,15 +1,13 @@
-import { useState, useContext } from 'react';
 import { NextPage, GetStaticPaths, GetStaticProps } from 'next'
-import { useRouter } from 'next/router';
 import { Grid, Box, Typography, Button, Chip } from "@mui/material"
 
-import { CartContext } from '../../context/cart/CartContext';
 import { ShopLayout } from "../../components/layouts"
 import { ProductSlideshow } from "../../components/products"
 import { ItemCounter, SizeSelector } from "../../components/ui"
 
 import { dbProducts } from "../../database"
-import { IProduct, ICartProduct, ISize } from '../../interfaces';
+import { IProduct } from '../../interfaces';
+import { useProduct } from '../../hooks/useProduct';
 
 interface Props {
   product: IProduct
@@ -17,42 +15,7 @@ interface Props {
 
 const ProductPage: NextPage<Props> = ({ product }) => {
 
-  const { addProductToCart } = useContext( CartContext );
-
-  const router = useRouter();
-  const [tempCartProduct, setTempCartProduct] = useState<ICartProduct>({
-    _id: product._id,
-    image: product.images[0],
-    price: product.price,
-    size: undefined,
-    slug: product.slug,
-    title: product.title,
-    gender: product.gender,
-    quantity: 1,
-  })
-
-  const selectedSize = ( size: ISize ) => {
-    setTempCartProduct( currentProduct => ({
-      ...currentProduct,
-      size
-    }) )
-  }
-
-  const onUpdatedQuantity = ( quantity: number ) => {
-    setTempCartProduct( currentProduct => ({
-      ...currentProduct,
-      quantity
-    }) )
-  }
-
-  const onAddProduct = () => {
-    
-    if ( !tempCartProduct.size ) { return };
-
-    addProductToCart(tempCartProduct);
-    
-    router.push('/cart')
-  }
+  const { tempCartProduct, selectedSize, onUpdatedQuantity, onAddProduct } = useProduct( product );
 
   return (
     <ShopLayout title={ product.title } pageDescription={ product.description } >
