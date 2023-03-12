@@ -31,7 +31,8 @@ const productSchema = new Schema({
             message: '{VALUE} no es un genero válido'
         },
         default: 'women'
-    }
+    },
+    active: { type: Boolean, required: true},
 },{
     timestamps: true
 });
