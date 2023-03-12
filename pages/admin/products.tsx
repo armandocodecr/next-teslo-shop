@@ -1,12 +1,16 @@
 
 import NextLink from 'next/link'
 import { AddOutlined, CategoryOutlined } from '@mui/icons-material';
-import { Box, Button, CardMedia, Grid, Link } from '@mui/material'
+import { Box, Button, CardMedia, Grid, Link, Typography } from '@mui/material'
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import useSWR from 'swr';
 
 import { AdminLayout } from '../../components/layouts'
 import { IProduct } from '../../interfaces';
+import { DropdownMenu } from '../../components/admin';
+import { useDropDownMenu } from '../../hooks';
+import { useContext, useEffect } from 'react';
+import { UiContext } from '../../context';
 
 
 const columns:GridColDef[] = [
@@ -48,10 +52,12 @@ const columns:GridColDef[] = [
 const ProductsPage = () => {
 
     const { data } = useSWR<IProduct[]>('/api/admin/products');
+    const { isDropdownOpen } = useContext(UiContext);
+    const filterData = data?.filter(product => product.active === isDropdownOpen)
+    
+    if( !filterData ) return (<></>);
 
-    if( !data ) return (<></>);
-
-    const rows = data!.map( product => ({
+    const rows = filterData!.map( product => ({
         id: product._id,
         img: product.images[0],
         title: product.title,
@@ -70,7 +76,12 @@ const ProductsPage = () => {
         icon={ <CategoryOutlined/> }
     >
 
-        <Box display='flex' justifyContent='end' sx={{ mb: 2 }}>
+        <Box display='flex' justifyContent='end' sx={{ mb: 2 }} alignItems='center'>
+
+            <Typography>Filtrar por disponibilidad:</Typography>
+
+            <DropdownMenu />
+
             <Button
                 startIcon={ <AddOutlined /> }
                 color='secondary'
