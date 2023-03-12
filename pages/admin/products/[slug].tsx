@@ -17,6 +17,7 @@ import { AdminLayout } from '../../../components/layouts'
 import { dbProducts } from '../../../database';
 import tesloApi from '../../../api/tesloApi';
 import { Product } from '../../../models';
+import { Typography } from '@mui/material';
 
 interface Props {
     product: IProduct;
@@ -27,7 +28,8 @@ const ProductAdminPage:FC<Props> = ({ product, slug }) => {
 
     const router = useRouter();
     const fileInputRef = useRef<HTMLInputElement>(null);
-    const [isSaving, setIsSaving] = useState(false)
+    const [isSaving, setIsSaving] = useState(false);
+    const [productActivated, setProductActivated] = useState(product.active)
     
     const { handleSubmit, register, 
             onDeleteImage, onFileSelected, 
@@ -41,11 +43,16 @@ const ProductAdminPage:FC<Props> = ({ product, slug }) => {
         if( form.images.length < 2 ) return alert('Mínimos 2 imagenes');
         setIsSaving(true);
 
+        const newProduct = {
+            ...form,
+            active: productActivated
+        }
+
         try {
             const { data } = await tesloApi({
                 url: '/admin/products',
                 method: form._id ? 'PUT' : 'POST', // si tenemos un _id entonces actualizar, si no crear
-                data: form
+                data: newProduct
             })
 
             if( form._id === undefined ) {
@@ -76,6 +83,10 @@ const ProductAdminPage:FC<Props> = ({ product, slug }) => {
 
     }
 
+    const handleChange = () => {
+        setProductActivated(!productActivated)
+    }
+
     return (
         <AdminLayout 
             title={'Producto'} 
@@ -84,6 +95,38 @@ const ProductAdminPage:FC<Props> = ({ product, slug }) => {
         >
             <form onSubmit={ handleSubmit( onSubmit ) } >
                 <Box display='flex' justifyContent='end' sx={{ mb: 1 }}>
+                    {
+                        slug !== 'new' && (
+                            <>
+                                <Box display='flex' alignItems='center'>
+                                    <Typography sx={{ mr: 2 }}>Estado del producto:</Typography>
+                                    <FormGroup sx={{ display: 'flex', flexDirection: 'row' }}>
+                                        <FormControlLabel 
+                                            control={<Checkbox checked={productActivated} />} 
+                                            onChange={handleChange}
+                                            label="Activated" 
+                                        />
+                                        <FormControlLabel 
+                                            control={<Checkbox checked={!productActivated} />} 
+                                            onChange={handleChange}
+                                            label="Disabled" 
+                                        />
+                                    </FormGroup>
+                                </Box>
+
+                                <Button 
+                                    color="error"
+                                    startIcon={ <SaveOutlined /> }
+                                    sx={{ width: '150px', mr: 2 }}
+                                    type="button"
+                                    onClick={ () => windowsDeleteConfirmation( product._id, product.images, router ) }
+                                    disabled={ isSaving }
+                                 >
+                                     Eliminar
+                                </Button>
+                            </>
+                        )
+                    }
                     <Button 
                         color="secondary"
                         startIcon={ <SaveOutlined /> }
@@ -94,20 +137,6 @@ const ProductAdminPage:FC<Props> = ({ product, slug }) => {
                         Guardar
                     </Button>
 
-                    {
-                        slug !== 'new' && (
-                            <Button 
-                                color="error"
-                                startIcon={ <SaveOutlined /> }
-                                sx={{ width: '150px', mr: 2 }}
-                                type="button"
-                                onClick={ () => windowsDeleteConfirmation( product._id, product.images, router ) }
-                                disabled={ isSaving }
-                             >
-                                 Eliminar
-                            </Button>
-                        )
-                    }
 
                 </Box>
 
@@ -133,7 +162,7 @@ const ProductAdminPage:FC<Props> = ({ product, slug }) => {
                             variant="filled"
                             fullWidth 
                             multiline
-                            rows={4}
+                            rows={8}
                             sx={{ mb: 1 }}
                             { ...register('description', {
                                 required: 'Este campo es requerido',
