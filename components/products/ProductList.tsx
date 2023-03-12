@@ -8,10 +8,13 @@ interface Props {
 }
 
 export const ProductList: FC<Props> = ({ products }) => {
+
+  const filterProducts = products.filter(item => item.active !== false)
+
   return (
     <Grid container spacing={4}>
        {
-         products.map( product => (
+         filterProducts.map( product => (
             <ProductCart
                 key={ product.slug }
                 product={ product }
