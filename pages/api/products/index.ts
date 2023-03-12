@@ -37,7 +37,7 @@ const getProducts = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
 
     try {
         const products = await Product.find(condition)
-                                .select('title images price inStock slug -_id') //indico qué datos de la informacion quiero, y resto el "_id"
+                                .select('title images price inStock active slug -_id') //indico qué datos de la informacion quiero, y resto el "_id"
                                 .lean();
 
         const updatedProducts = products.map ( product => {
