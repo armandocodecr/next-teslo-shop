@@ -28,6 +28,7 @@ export const connect = async() => {
         await mongoose.disconnect();
     }
 
+    mongoose.set("strictQuery", false);
     await mongoose.connect( process.env.MONGO_URL || '');
     mongoConnection.isConnected = 1;
     console.log('Conectado a MongoDB:', process.env.MONGO_URL );
@@ -39,8 +40,9 @@ export const disconnect = async() => {
 
     if ( mongoConnection.isConnected === 0 ) return;
 
-    await mongoose.disconnect();
-    mongoConnection.isConnected = 0;
+    return;
+    // await mongoose.disconnect();
+    // mongoConnection.isConnected = 0;
 
     console.log('Desconectado de MongoDB');
 }
