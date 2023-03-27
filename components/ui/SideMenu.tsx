@@ -46,7 +46,7 @@ export const SideMenu = () => {
                         onChange={ (e) => setSearchTerm( e.target.value ) }
                         onKeyPress={ (e) => e.key === 'Enter' ? onSearchTerm() : null }
                         type='text'
-                        placeholder="Buscar..."
+                        placeholder="Search..."
                         endAdornment={
                             <InputAdornment position="end">
                                 <IconButton
@@ -66,14 +66,14 @@ export const SideMenu = () => {
                                 <ListItemIcon>
                                     <AccountCircleOutlined/>
                                 </ListItemIcon>
-                                <ListItemText primary={'Perfil'} />
+                                <ListItemText primary={'Profile'} />
                             </ListItem>
 
                             <ListItem button onClick={() => navigateTo('/orders/history')}>
                                 <ListItemIcon >
                                     <ConfirmationNumberOutlined/>
                                 </ListItemIcon>
-                                <ListItemText primary={'Mis Ordenes'} />
+                                <ListItemText primary={'My orders'} />
                             </ListItem>
                         </div>
                     )
@@ -84,21 +84,21 @@ export const SideMenu = () => {
                     <ListItemIcon>
                         <MaleOutlined/>
                     </ListItemIcon>
-                    <ListItemText primary={'Hombres'} />
+                    <ListItemText primary={'Men'} />
                 </ListItem>
 
                 <ListItem button sx={{ display: { xs: '', sm: 'none' } }} onClick={ () => navigateTo('/category/women') }>
                     <ListItemIcon>
                         <FemaleOutlined/>
                     </ListItemIcon>
-                    <ListItemText primary={'Mujeres'} />
+                    <ListItemText primary={'Women'} />
                 </ListItem>
 
                 <ListItem button sx={{ display: { xs: '', sm: 'none' } }} onClick={ () => navigateTo('/category/kid') }>
                     <ListItemIcon>
                         <EscalatorWarningOutlined/>
                     </ListItemIcon>
-                    <ListItemText primary={'Niños'} />
+                    <ListItemText primary={'Kids'} />
                 </ListItem>
 
 
@@ -110,7 +110,7 @@ export const SideMenu = () => {
                             <ListItemIcon>
                                 <VpnKeyOutlined/>
                             </ListItemIcon>
-                            <ListItemText primary={'Ingresar'} />
+                            <ListItemText primary={'Join'} />
                         </ListItem>
                     )
                     : (
@@ -118,7 +118,7 @@ export const SideMenu = () => {
                             <ListItemIcon>
                                 <LoginOutlined/>
                             </ListItemIcon>
-                            <ListItemText primary={'Salir'} />
+                            <ListItemText primary={'Exit'} />
                         </ListItem>
                     )
                 }
@@ -147,7 +147,7 @@ export const SideMenu = () => {
                                 <ListItemIcon>
                                     <CategoryOutlined/>
                                 </ListItemIcon>
-                                <ListItemText primary={'Productos'} />
+                                <ListItemText primary={'Products'} />
                             </ListItem>
 
                             <ListItem 
@@ -157,7 +157,7 @@ export const SideMenu = () => {
                                 <ListItemIcon>
                                     <ConfirmationNumberOutlined/>
                                 </ListItemIcon>
-                                <ListItemText primary={'Ordenes'} />
+                                <ListItemText primary={'Orders'} />
                             </ListItem>
 
                             <ListItem 
@@ -167,7 +167,7 @@ export const SideMenu = () => {
                                 <ListItemIcon>
                                     <AdminPanelSettings/>
                                 </ListItemIcon>
-                                <ListItemText primary={'Usuarios'} />
+                                <ListItemText primary={'Users'} />
                             </ListItem>
                         </div>
                     )

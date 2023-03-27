@@ -29,27 +29,27 @@ const HistoryPage: NextPage<Props> = ({ orders }) => {
 
     const columns: GridColDef[] = [
         { field: 'id', headerName: 'ID', width: 100 },
-        { field: 'fullname', headerName: 'Nombre Completo', width: 300 },
+        { field: 'fullname', headerName: 'Name', width: 300 },
 
         {
             field: 'paid',
-            headerName: 'Pagada',
-            description: 'Muestra informacion si está pagada o no',
+            headerName: 'Paid',
+            description: 'Shows information if it is paid or not',
             width: 200,
             renderCell: (params: GridValueGetterParams) => {
                 return (
                     params.row.paid 
-                        ? <Chip color='success' label='Pagada' variant='outlined' />
-                        : <Chip color='error' label='No pagada' variant='outlined' />
+                        ? <Chip color='success' label='Paid' variant='outlined' />
+                        : <Chip color='error' label='Pending' variant='outlined' />
                 )
             }
         },
 
-        { field: 'orderId', headerName: 'ID Orden', width: 300 },
+        { field: 'orderId', headerName: 'ID Order', width: 300 },
 
         {
             field: 'orden',
-            headerName: 'Orden',
+            headerName: 'Order',
             width: 200,
             sortable: false,
             renderCell: (params: GridValueGetterParams) => {
@@ -58,8 +58,8 @@ const HistoryPage: NextPage<Props> = ({ orders }) => {
                     <NextLink href={`/orders/${ID}`} passHref legacyBehavior>
                         {
                             params.row.paid
-                                ? <Link underline='always'> Ver orden </Link>
-                                : <Link underline='always'> Pagar orden </Link>
+                                ? <Link underline='always'> See order </Link>
+                                : <Link underline='always'> Pay order </Link>
                         }
                         
                     </NextLink>
@@ -68,18 +68,18 @@ const HistoryPage: NextPage<Props> = ({ orders }) => {
         },
         {
             field: 'recibo',
-            headerName: 'Recibo',
+            headerName: 'Receipt',
             width: 200,
             renderCell: (params: GridValueGetterParams) => {
                 const order = params.row.orderComplete
                 return (
                     order.isPaid ? (
                         <button onClick={() => showReceipt(order) } className='btn-recibo-pdf'>
-                           <RemoveRedEyeIcon sx={{ fontSize: 20, mr: 0.5 }} /> Ver recibo
+                           <RemoveRedEyeIcon sx={{ fontSize: 20, mr: 0.5 }} /> See receipt
                         </button>
                     )
                     : (
-                        <p>Pendiente de pago...</p>
+                        <p>Pending...</p>
                     )
                 )
             }
@@ -95,9 +95,9 @@ const HistoryPage: NextPage<Props> = ({ orders }) => {
     }) );
 
   return (
-    <ShopLayout title='Historial de ordenes' pageDescription='Historial de ordenes del cliente'>
+    <ShopLayout title='Order history' pageDescription='Historial de ordenes del cliente'>
 
-        <Typography variant='h1' component='h1'>Historial de ordenes</Typography>
+        <Typography variant='h1' component='h1'>Order history</Typography>
 
         <Grid container className='fadeIn'>
             <Grid item xs={12} sx={{ height: 650, width: '100%' }}>
@@ -114,7 +114,7 @@ const HistoryPage: NextPage<Props> = ({ orders }) => {
             verRecibo ? (
                 <div className="contenedor-pdf">
                     <button id='btn-contenedor-pdf' onClick={ () => setVerRecibo(false) }>
-                        Cerrar comprobante
+                        close receipt
                     </button>
                     <PDFViewer style={{ 
                         width: "100%", 

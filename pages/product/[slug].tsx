@@ -40,7 +40,7 @@ const ProductPage: NextPage<Props> = ({ product }) => {
                   {/* Cantidad */}
 
                   <Box sx={{ my: 2 }}>
-                    <Typography variant="subtitle2" sx={{ ml: 1.5 }}>Cantidad</Typography>
+                    <Typography variant="subtitle2" sx={{ ml: 1.5 }}>Quantity</Typography>
                         <ItemCounter
                           currentValue={ tempCartProduct.quantity }
                           updatedQuantity={ onUpdatedQuantity }
@@ -63,20 +63,20 @@ const ProductPage: NextPage<Props> = ({ product }) => {
                       >
                           {
                             tempCartProduct.size
-                              ? 'Agregar al carrito'
+                              ? 'Add to cart'
                               : 'Seleccione una talla'
                           }
                       </Button>
                     )
                     : (
-                      <Chip label='No hay disponibles' color="error" variant='outlined' /> 
+                      <Chip label='Not available' color="error" variant='outlined' /> 
                     )
                   }
 
                   {/* Descripcion */}
 
                   <Box sx={{ mt: 3 }} >
-                      <Typography variant="subtitle2">Descripcion:</Typography>
+                      <Typography variant="subtitle2">Description:</Typography>
                       <Typography variant="body2">{ product.description }</Typography>
                   </Box>
 

@@ -12,9 +12,9 @@ const HomePage: NextPage = () => {
 
   return (
    <ShopLayout title={ 'Tesla-Shop - Home'} pageDescription={'Encuentra los mejores productos de Teslo aqui'} >
-      <Typography variant='h1' component='h1'>Tienda</Typography> 
+      <Typography variant='h1' component='h1'>Store</Typography> 
       {/* "component" le indica al SEO que es el titulo de la pagina */}
-      <Typography variant='h2' sx={{ mb: 1 }}>Todos los productos</Typography>
+      <Typography variant='h2' sx={{ mb: 1 }}>All the products</Typography>
 
       {
         isLoading

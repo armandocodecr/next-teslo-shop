@@ -13,11 +13,11 @@ const UsersPage = () => {
     if( !data && !error ) return (<></>);
 
     const columns: GridColDef[] = [
-        { field: 'email', headerName: 'Correo', width: 250 },
-        { field: 'name', headerName: 'Nombre completo', width: 300 },
+        { field: 'email', headerName: 'Email', width: 250 },
+        { field: 'name', headerName: 'Name', width: 300 },
         { 
             field: 'role', 
-            headerName: 'Rol', 
+            headerName: 'Role', 
             width: 300 ,
             renderCell: ({ row }: GridValueGetterParams) => {
                 return (
@@ -46,8 +46,8 @@ const UsersPage = () => {
 
   return (
     <AdminLayout
-        title='Usuarios'
-        subTitle='Mantenimiento de usuarios'
+        title='Users'
+        subTitle='Users maintenance'
         icon={ <PeopleOutline /> }
     >
 

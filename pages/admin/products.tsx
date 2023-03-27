@@ -8,14 +8,13 @@ import useSWR from 'swr';
 import { AdminLayout } from '../../components/layouts'
 import { IProduct } from '../../interfaces';
 import { DropdownMenu } from '../../components/admin';
-import { useDropDownMenu } from '../../hooks';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { UiContext } from '../../context';
 
 
 const columns:GridColDef[] = [
     { 
-        field: 'img', headerName: 'Imagen',
+        field: 'img', headerName: 'Image',
         renderCell: ( { row }: GridValueGetterParams ) =>{
             return (
                 <a href={`/product/${ row.slug }`} target="_blank" rel="noreferrer" >
@@ -30,7 +29,7 @@ const columns:GridColDef[] = [
         }
     }, //Quitamos el witdh para que eso lo determine la imagen
     { 
-        field: 'title', headerName: 'Título', width: 300,
+        field: 'title', headerName: 'Title', width: 300,
          renderCell:( { row }: GridValueGetterParams ) => {
             return (
                 <NextLink href={`/admin/products/${ row.slug }`} passHref legacyBehavior>
@@ -41,11 +40,11 @@ const columns:GridColDef[] = [
             )
          }
     },
-    { field: 'gender', headerName: 'Género' },
-    { field: 'type', headerName: 'Tipo' },
-    { field: 'inStock', headerName: 'Inventario' },
-    { field: 'price', headerName: 'Precio' },
-    { field: 'sizes', headerName: 'Tallas', width: 200 },
+    { field: 'gender', headerName: 'Gender' },
+    { field: 'type', headerName: 'Type' },
+    { field: 'inStock', headerName: 'Inventory' },
+    { field: 'price', headerName: 'Price' },
+    { field: 'sizes', headerName: 'Sizes', width: 200 },
 
 ]
 
@@ -71,14 +70,14 @@ const ProductsPage = () => {
 
   return (
     <AdminLayout
-        title={`Productos (${ data?.length })`}
-        subTitle={'Mantenimiento de productos'}
+        title={`Products (${ data?.length })`}
+        subTitle={'Products maintenance'}
         icon={ <CategoryOutlined/> }
     >
 
         <Box display='flex' justifyContent='end' sx={{ mb: 2 }} alignItems='center'>
 
-            <Typography>Filtrar por disponibilidad:</Typography>
+            <Typography>Filter by availability:</Typography>
 
             <DropdownMenu />
 
@@ -87,7 +86,7 @@ const ProductsPage = () => {
                 color='secondary'
                 href="/admin/products/new"
             >
-                Crear producto
+                Create product
             </Button>
         </Box>
 

@@ -21,14 +21,14 @@ const OrderPage: NextPage<Props> = ({ order }) => {
 
 
   return (
-    <AdminLayout title='Resumen de la orden' subTitle={`Orden ID: ${ order._id }`} icon={ <ConfirmationNumberOutlined /> }>
+    <AdminLayout title='Summary order' subTitle={`Orden ID: ${ order._id }`} icon={ <ConfirmationNumberOutlined /> }>
 
         {
             order.isPaid
             ? (
                 <Chip 
                     sx={{ my: 2 }}
-                    label='Orden pagada'
+                    label='Paid order'
                     variant='outlined'
                     color='success'
                     icon={ <CreditScoreOutlined /> }
@@ -37,7 +37,7 @@ const OrderPage: NextPage<Props> = ({ order }) => {
             (
                 <Chip 
                     sx={{ my: 2 }}
-                    label='Pendiente de pago'
+                    label='Pending order'
                     variant='outlined'
                     color='error'
                     icon={ <CreditCardOffOutlined /> }
@@ -52,11 +52,11 @@ const OrderPage: NextPage<Props> = ({ order }) => {
             <Grid item xs={ 12 } sm={ 5 }>
                 <Card className='summary-card'>
                     <CardContent>
-                        <Typography variant='h2'>Resumen ({ order.numberOfItems } { order.numberOfItems >1 ? 'productos' : 'producto' } )</Typography>
+                        <Typography variant='h2'>Summary ({ order.numberOfItems } { order.numberOfItems >1 ? 'products' : 'product' } )</Typography>
                         <Divider sx={{ my: 1 }} />
 
                         <Box display='flex' justifyContent='space-between'>
-                            <Typography variant='subtitle1'>Direccion de entrega</Typography>
+                            <Typography variant='subtitle1'>Delivery address</Typography>
                         </Box>
 
                         <Typography>{ shippingAddress.firstName } { shippingAddress.lastName }</Typography>
@@ -86,7 +86,7 @@ const OrderPage: NextPage<Props> = ({ order }) => {
                                     ? (
                                         <Chip 
                                             sx={{ my: 2 }}
-                                            label='Orden pagada'
+                                            label='Paid order'
                                             variant='outlined'
                                             color='success'
                                             icon={ <CreditScoreOutlined /> }
@@ -95,7 +95,7 @@ const OrderPage: NextPage<Props> = ({ order }) => {
                                     : (
                                         <Chip 
                                             sx={{ my: 2 }}
-                                            label='Orden no paga'
+                                            label='Order does not pay'
                                             variant='outlined'
                                             color='error'
                                             icon={ <CreditScoreOutlined /> }

@@ -22,9 +22,9 @@ const SummaryPage = () => {
 
 
   return (
-    <ShopLayout title='Resumen de orden' pageDescription={'Resumen de la orden'}>
+    <ShopLayout title='Order summary' pageDescription={'Resumen de la orden'}>
 
-        <Typography variant='h1' component='h1' sx={{ mb: 2 }}>Resumen de la orden</Typography>
+        <Typography variant='h1' component='h1' sx={{ mb: 2 }}>Order summary</Typography>
 
         <Grid container>
             <Grid item xs={ 12 } sm={ 7 }>
@@ -33,14 +33,14 @@ const SummaryPage = () => {
             <Grid item xs={ 12 } sm={ 5 }>
                 <Card className='summary-card'>
                     <CardContent>
-                        <Typography variant='h2'>Resumen ({ numberOfItems } { numberOfItems === 1 ? 'Producto' : 'Productos' } )</Typography>
+                        <Typography variant='h2'>Summary ({ numberOfItems } { numberOfItems === 1 ? 'Product' : 'Products' } )</Typography>
                         <Divider sx={{ my: 1 }} />
 
                         <Box display='flex' justifyContent='space-between'>
-                        <Typography variant='subtitle1'>Direccion de entrega</Typography>
+                        <Typography variant='subtitle1'>Delivery address</Typography>
                             <NextLink href='/checkout/address' passHref>
                                 <Link underline='always'>
-                                    Editar
+                                    Edit
                                 </Link>
                             </NextLink>
                         </Box>
@@ -56,7 +56,7 @@ const SummaryPage = () => {
                          <Box display='flex' justifyContent='end'>
                             <NextLink href='/cart' passHref>
                                 <Link underline='always'>
-                                    Editar
+                                    Edit
                                 </Link>
                             </NextLink>
                         </Box>                  
@@ -71,7 +71,7 @@ const SummaryPage = () => {
                                 onClick={ onCreateOrder }
                                 disabled={ isPosting }
                                 >
-                                Confirmar orden
+                                Confirm order
                             </Button>
 
                             <Chip

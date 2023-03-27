@@ -24,16 +24,16 @@ const LoginPage = () => {
         } = useAuth();
 
   return (
-    <AuthLayout title='Ingresar'>
+    <AuthLayout title='Join'>
         <form onSubmit={ handleSubmit(onLoginUser) } noValidate>
             <Box sx={{ width: 350, padding: '10px 20px' }}>
                 <Grid container spacing={2}>
                     
                     <Grid item xs={12}>
-                        <Typography variant='h1' component='h1'display='flex' justifyContent='center' > Iniciar sección </Typography>
+                        <Typography variant='h1' component='h1'display='flex' justifyContent='center' > Login </Typography>
 
                         <Chip 
-                            label='No conocemos ese correo / contraseña'
+                            label='We do not recognize this email / password'
                             color='error'
                             icon={ <ErrorOutline /> }
                             className='fadeIn'
@@ -45,13 +45,13 @@ const LoginPage = () => {
                     <Grid item xs={12}>
                         <TextField
                             type='email' 
-                            label='Correo' 
+                            label='Email' 
                             variant='filled' 
                             fullWidth
                             //Este codigo es la propagacion de ciertas propiedades que el register nos va a dar
                             { 
                                 ...register('email', {
-                                    required: 'Este campo es requerido',
+                                    required: 'This field is required',
                                     validate: validation.isEmail
 
                                 }) 
@@ -64,14 +64,14 @@ const LoginPage = () => {
 
                     <Grid item xs={12}>
                         <TextField  
-                            label='Contraseña' 
+                            label='Password' 
                             type='password' 
                             variant='filled' 
                             fullWidth
                             { 
                                 ...register('password', {
-                                    required: 'Este campo es requerido',
-                                    minLength: { value: 5, message: 'Mínimo 6 caracteres' }
+                                    required: 'This field is required',
+                                    minLength: { value: 5, message: 'min 6 characters' }
                                 }) 
                             }
                             error={ !!errors.password }
@@ -86,21 +86,21 @@ const LoginPage = () => {
                             size='large' 
                             type='submit'
                             fullWidth>
-                            Ingresar
+                            Sign in
                         </Button>
                     </Grid>
 
                     <Grid item xs={12} display='flex' justifyContent='center'>
                     <NextLink href={ !router.query.p?.toString() ? '/auth/register' : `/auth/register?p=${ router.query.p?.toString() }`} passHref legacyBehavior>
                             <Link underline='always'>
-                                ¿No tienes cuenta?
+                                ¿Not a member?
                             </Link>
                     </NextLink>
                     </Grid>
 
                     <Grid item xs={12} display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
                         <Divider sx={{ width: '100%', mb: 2  }} />
-                        <Typography sx={{ mb: 2 }}>También puedes loguearte con</Typography>
+                        <Typography sx={{ mb: 2 }}>Or sign up using</Typography>
                         { //Obtengo primero los valores del objeto para luego mapearlos
                             Object.values( providers ).map( ( provider: any ) =>{
 

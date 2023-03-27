@@ -23,11 +23,11 @@ export const OrderSummary: FC<Props> = ({ orderValues }) => {
     <Grid container>
 
         <Grid item xs={6}>
-            <Typography>No. Productos</Typography>
+            <Typography>No. Products</Typography>
         </Grid>
 
         <Grid item xs={6} display='flex' justifyContent='end'>
-            <Typography>{ summaryValues.numberOfItems } { summaryValues.numberOfItems > 1 ? 'productos' : 'producto' }</Typography>
+            <Typography>{ summaryValues.numberOfItems } { summaryValues.numberOfItems > 1 ? 'products' : 'product' }</Typography>
         </Grid>
 
         <Grid item xs={6}>
@@ -39,7 +39,7 @@ export const OrderSummary: FC<Props> = ({ orderValues }) => {
         </Grid>
 
         <Grid item xs={6}>
-            <Typography>Impuestos ({ Number(process.env.NEXT_PUBLIC_TAX_RATE) * 100 })% </Typography>
+            <Typography>Tax ({ Number(process.env.NEXT_PUBLIC_TAX_RATE) * 100 })% </Typography>
         </Grid>
 
         <Grid item xs={6} display='flex' justifyContent='end'>

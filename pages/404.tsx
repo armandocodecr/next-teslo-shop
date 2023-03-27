@@ -12,7 +12,7 @@ export const Custom404 = () => {
         sx={{ flexDirection: { xs: 'column', sm: 'row' } }}
         >
             <Typography variant='h1' component='h1' fontSize={75} fontWeight={200}>404 |</Typography>
-            <Typography marginLeft={2}>Página no encontrada</Typography>
+            <Typography marginLeft={2}>Page not found</Typography>
         </Box>
     </ShopLayout>
   )

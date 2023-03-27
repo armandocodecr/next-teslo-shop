@@ -24,17 +24,17 @@ const RegisterPage = () => {
         } = useAuth();
 
   return (
-    <AuthLayout title='Ingresar'>
+    <AuthLayout title='Sign up'>
         <form onSubmit={ handleSubmit(onRegisterForm) } noValidate>
             <Box sx={{ width: 350, padding: '10px 20px' }}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <Typography variant='h1' component='h1'
                         display='flex' justifyContent='center' >
-                            Crear cuenta
+                            Sign up
                         </Typography>
                         <Chip
-                            label='Este correo ya está registrado'
+                            label='This email is already registered'
                             color='error'
                             icon={ <ErrorOutline /> }
                             className='fadeIn'
@@ -44,13 +44,13 @@ const RegisterPage = () => {
 
                     <Grid item xs={12}>
                         <TextField 
-                            label='Nombre' 
+                            label='Name' 
                             variant='filled' 
                             fullWidth
                             { 
                                 ...register('name', {
-                                    required: 'Este campo es requerido',
-                                    minLength: { value: 2, message: 'Mínimo 2 caracteres' }
+                                    required: 'This field is required',
+                                    minLength: { value: 2, message: 'min 2 characters' }
                                 }) 
                             }
                             error={ !!errors.name }
@@ -61,12 +61,12 @@ const RegisterPage = () => {
                     <Grid item xs={12}>
                         <TextField 
                             type='email'
-                            label='Correo' 
+                            label='Email' 
                             variant='filled' 
                             fullWidth
                             { 
                                 ...register('email', {
-                                    required: 'Este campo es requerido',
+                                    required: 'This field is required',
                                     validate: validation.isEmail
 
                                 }) 
@@ -84,8 +84,8 @@ const RegisterPage = () => {
                             fullWidth
                             { 
                                 ...register('password', {
-                                    required: 'Este campo es requerido',
-                                    minLength: { value: 5, message: 'Mínimo 6 caracteres' }
+                                    required: 'This field is required',
+                                    minLength: { value: 5, message: 'min 2 characters' }
                                 }) 
                             }
                             error={ !!errors.password }
@@ -95,14 +95,14 @@ const RegisterPage = () => {
 
                     <Grid item xs={12}>
                         <Button type='submit' color='secondary' className='circular-btn' size='large' fullWidth>
-                            Ingresar
+                            Log in
                         </Button>
                     </Grid>
 
                     <Grid item xs={12} display='flex' justifyContent='center'>
                     <NextLink href={ !router.query.p?.toString() ? '/auth/login' : `/auth/login?p=${ router.query.p?.toString() }`} passHref legacyBehavior>
                             <Link underline='always'>
-                                ¿Ya tienes cuenta?
+                                ¿Do you already have an account?
                             </Link>
                     </NextLink>
                     </Grid>

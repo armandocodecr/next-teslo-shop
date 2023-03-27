@@ -9,22 +9,22 @@ import { formatDate } from '../../utils/formatDate.';
 
 const columns:GridColDef[] = [
     { field: 'id', headerName: 'Orden ID', width: 250 },
-    { field: 'email', headerName: 'Correo', width: 250 },
-    { field: 'name', headerName: 'Nombre completo', width: 300 },
-    { field: 'total', headerName: 'Monto total', width: 120 },
+    { field: 'email', headerName: 'Email', width: 250 },
+    { field: 'name', headerName: 'Name', width: 300 },
+    { field: 'total', headerName: 'Total amount', width: 120 },
     {
         field: 'isPaid',
-        headerName: 'Pagada',
+        headerName: 'Paid',
         renderCell: ({ row }: GridValueGetterParams) => {
             return row.isPaid
-                ? <Chip variant='outlined' label='Pagada' color='success' />
-                : <Chip variant='outlined' label='Pendiente' color='error' />
+                ? <Chip variant='outlined' label='Paid' color='success' />
+                : <Chip variant='outlined' label='Pending' color='error' />
         }
     },
-    { field: 'inStock', headerName: 'No.Productos', align: 'center', width: 120 },
+    { field: 'inStock', headerName: 'No.Products', align: 'center', width: 120 },
     {
         field: 'check',
-        headerName: 'Ver orden',
+        headerName: 'See order',
         width: 150,
         renderCell: ({ row }: GridValueGetterParams) => {
             return (
@@ -34,12 +34,12 @@ const columns:GridColDef[] = [
                     className='btn-recibo-pdf' 
                     style={{ width: '150px', textDecoration: 'none' }}
                 >
-                     Ver orden
+                     See order
                 </a>
             )
         }
     },
-    { field: 'createdAt', headerName: 'Creada en', width: 200 },
+    { field: 'createdAt', headerName: 'Created in', width: 200 },
 
 ]
 
@@ -61,8 +61,8 @@ const OrdersPage = () => {
 
   return (
     <AdminLayout
-        title={'Ordenes'}
-        subTitle={'Mantenimiento de ordenes'}
+        title={'Orders'}
+        subTitle={'Orders maintenance'}
         icon={ <ConfirmationNumberOutlined /> }
     >
 

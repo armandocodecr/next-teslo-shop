@@ -32,10 +32,10 @@ const Recibo = ( { infoReceipt }) => {
                                 <Text style={{ textAlign: "center", fontSize: "16px", fontWeight: "bold", borderBottom: "1px solid #000" }}>
                                     {`TESLO STYLE'S`}
                                 </Text>
-                                <Text style={{ textAlign: "center", fontSize: "13px", fontWeight: "bold", marginTop: 10 }}>VENTA AL POR MAYOR Y MENOR PRECIO</Text>
+                                <Text style={{ textAlign: "center", fontSize: "13px", fontWeight: "bold", marginTop: 10 }}>WHOLESALE AND REDUCED PRICE</Text>
                                 <Text style={{ textAlign: "center", fontSize: "13px", fontWeight: "bold" }}>San José - Costa Rica</Text>
-                                <Text style={{ textAlign: "center", fontSize: "13px", fontWeight: "bold" }}>Calle 13 - Nro. 150</Text>
-                                <Text style={{ textAlign: "center", fontSize: "13px", fontWeight: "bold" }}>Celular: 3424234354</Text>
+                                <Text style={{ textAlign: "center", fontSize: "13px", fontWeight: "bold" }}>Street 13 - Nro. 150</Text>
+                                <Text style={{ textAlign: "center", fontSize: "13px", fontWeight: "bold" }}>Phone: 3424234354</Text>
                             </View>
                         </View>
                         <View style={{ flex: 2 }}>
@@ -50,7 +50,7 @@ const Recibo = ( { infoReceipt }) => {
                                     borderRadius: "10px",
                                 }}
                             >
-                                <Text style={{ textAlign: "center", fontSize: "14px", fontWeight: "bold" }}>Comprobante de pago</Text>
+                                <Text style={{ textAlign: "center", fontSize: "14px", fontWeight: "bold" }}>Proof of payment</Text>
                                 <Text style={{ textAlign: "center", fontSize: "14px", fontWeight: "bold" }}>N° { infoReceipt._id }</Text>
                             </View>
                         </View>
@@ -58,17 +58,17 @@ const Recibo = ( { infoReceipt }) => {
                     <View style={{ display: "flex", flexDirection: "row", marginTop: "20px" }}>
                         <View style={{ flex: 1 }}>
                             <Text style={{ fontSize: "12px", fontWeight: "bold" }}>
-                                Cliente: { infoReceipt.shippingAddress.firstName } { infoReceipt.shippingAddress.lastName }
+                                Client: { infoReceipt.shippingAddress.firstName } { infoReceipt.shippingAddress.lastName }
                             </Text>
-                            <Text style={{ fontSize: "12px", fontWeight: "bold" }}>Direccion: { infoReceipt.shippingAddress.address }</Text>
-                            <Text style={{ fontSize: "12px", fontWeight: "bold" }}>Celular: { infoReceipt.shippingAddress.phone }</Text>
+                            <Text style={{ fontSize: "12px", fontWeight: "bold" }}>Address: { infoReceipt.shippingAddress.address }</Text>
+                            <Text style={{ fontSize: "12px", fontWeight: "bold" }}>Phone: { infoReceipt.shippingAddress.phone }</Text>
                         </View>
                         <View style={{ flex: 1 }}>
                             <Text style={{ fontSize: "12px", fontWeight: "bold" }}>
-                                Fecha de Emisión: { formatDate(infoReceipt.createdAt) }
+                            Date of issue: { formatDate(infoReceipt.createdAt) }
                             </Text>
-                            <Text style={{ fontSize: "12px", fontWeight: "bold" }}>Fecha de vencimiento: PAGO ONLINE</Text>
-                            <Text style={{ fontSize: "12px", fontWeight: "bold" }}>Impuesto sobre el total de la venta: 13%</Text>
+                            <Text style={{ fontSize: "12px", fontWeight: "bold" }}>Expiration date: ONLINE PAYMENT</Text>
+                            <Text style={{ fontSize: "12px", fontWeight: "bold" }}>Tax on the total sale: 13%</Text>
                         </View>
                     </View>
                     <View style={ stylesPDF.tabla }>
@@ -77,19 +77,19 @@ const Recibo = ( { infoReceipt }) => {
                                 <Text style={stylesPDF.tablaCeldaHeader}>ITEM</Text>
                             </View>
                             <View style={stylesPDF.tablaColumna1}>
-                                <Text style={stylesPDF.tablaCeldaHeader}>CANTIDAD</Text>
+                                <Text style={stylesPDF.tablaCeldaHeader}>Quantity</Text>
                             </View>
                             <View style={stylesPDF.tablaColumna2}>
-                                <Text style={stylesPDF.tablaCeldaHeader}>ID DEL PRODUCTO   </Text>
+                                <Text style={stylesPDF.tablaCeldaHeader}>PRODUCT ID</Text>
                             </View>
                             <View style={stylesPDF.tablaColumna2}>
-                                <Text style={stylesPDF.tablaCeldaHeader}>UNIDAD</Text>
+                                <Text style={stylesPDF.tablaCeldaHeader}>UNIT</Text>
                             </View>
                             <View style={stylesPDF.tablaColumna2}>
-                                <Text style={stylesPDF.tablaCeldaHeader}>PRECIO UNITARIO</Text>
+                                <Text style={stylesPDF.tablaCeldaHeader}>UNIT PRICE</Text>
                             </View>
                             <View style={stylesPDF.tablaColumna2}>
-                                <Text style={stylesPDF.tablaCeldaHeader}>IMPORTE TOTAL</Text>
+                                <Text style={stylesPDF.tablaCeldaHeader}>TOTAL</Text>
                             </View>
                         </View>
                         
@@ -130,7 +130,7 @@ const Recibo = ( { infoReceipt }) => {
                         }}
                     >
                         <Text style={{ fontSize: "10px", fontWeight: "bold", marginTop: 10 }}>
-                            IMPORTE TOTAL (MÁS IMPUESTOS): ${ infoReceipt.total }
+                            TOTAL AMOUNT (PLUS TAX): ${ infoReceipt.total }
                         </Text>
                     </View>
                 </View>

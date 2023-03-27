@@ -10,20 +10,20 @@ const AddresPage = () => {
     const {register, handleSubmit, errors, onDirectionForm} = useAddress();
 
   return (
-    <ShopLayout title="Direccion" pageDescription="Confirmar direccion del destino">
+    <ShopLayout title="Address" pageDescription="Confirmar direccion del destino">
         <form onSubmit={ handleSubmit(onDirectionForm) } noValidate>
-            <Typography variant="h1" component="h1">Dirección</Typography>
+            <Typography variant="h1" component="h1">Checkout</Typography>
 
             <Grid container spacing={ 2 } sx={{ mt: 2 }}>
                 
                 <Grid item xs={12} sm={6}>
                     <TextField 
-                        label='Nombre' 
+                        label='Name' 
                         variant="filled" 
                         fullWidth 
                         {
                             ...register('firstName', {
-                                required: 'Este campo es requerido'
+                                required: 'This field is required'
                             })
                         }
                         error={ !!errors.firstName }
@@ -33,12 +33,12 @@ const AddresPage = () => {
                 
                 <Grid item xs={12} sm={6}>
                     <TextField 
-                        label='Apellido' 
+                        label='Last name' 
                         variant="filled" 
                         fullWidth
                         {
                             ...register('lastName', {
-                                required: 'Este campo es requerido'
+                                required: 'This field is required'
                             })
                         }
                         error={ !!errors.lastName }
@@ -48,12 +48,12 @@ const AddresPage = () => {
 
                 <Grid item xs={12} sm={6}>
                     <TextField 
-                        label='Direccion' 
+                        label='Address' 
                         variant="filled" 
                         fullWidth 
                         {
                             ...register('address', {
-                                required: 'Este campo es requerido'
+                                required: 'This field is required'
                             })
                         }
                         error={ !!errors.address }
@@ -63,7 +63,7 @@ const AddresPage = () => {
 
                 <Grid item xs={12} sm={6}>
                     <TextField 
-                        label='Direccion 2 (Opcional)' 
+                        label='Address 2 (Optional)' 
                         variant="filled" 
                         fullWidth 
                         {
@@ -74,12 +74,12 @@ const AddresPage = () => {
 
                 <Grid item xs={12} sm={6}>
                     <TextField 
-                        label='Codigo postal' 
+                        label='Postal code' 
                         variant="filled" 
                         fullWidth 
                         {
                             ...register('zip', {
-                                required: 'Este campo es requerido'
+                                required: 'This field is required'
                             })
                         }
                         error={ !!errors.zip }
@@ -89,12 +89,12 @@ const AddresPage = () => {
 
                 <Grid item xs={12} sm={6}>
                     <TextField 
-                        label='Ciudad' 
+                        label='City' 
                         variant="filled" 
                         fullWidth 
                         {
                             ...register('city', {
-                                required: 'Este campo es requerido'
+                                required: 'This field is required'
                             })
                         }
                         error={ !!errors.city }
@@ -111,7 +111,7 @@ const AddresPage = () => {
                             defaultValue={ Cookies.get('country') || countries[0].code }
                             {
                                 ...register('country', {
-                                    required: 'Este campo es requerido'
+                                    required: 'This field is required'
                                 })
                             }
                             error={ !!errors.city }
@@ -131,12 +131,12 @@ const AddresPage = () => {
 
                 <Grid item xs={12} sm={6}>
                     <TextField 
-                        label='Teléfono' 
+                        label='Telephone' 
                         variant="filled" 
                         fullWidth 
                         {
                             ...register('phone', {
-                                required: 'Este campo es requerido'
+                                required: 'This field is required'
                             })
                         }
                         error={ !!errors.phone }
@@ -148,7 +148,7 @@ const AddresPage = () => {
 
             <Box sx={{ mt: 5 }} display='flex' justifyContent='center'>
                 <Button type="submit" color="secondary" className="circular-btn" size="large">
-                    Revisar pedido
+                    Review
                 </Button>
             </Box>
         </form>

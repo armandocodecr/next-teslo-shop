@@ -12,9 +12,9 @@ const KidPage: NextPage = () => {
 
   return (
    <ShopLayout title={ 'Tesla-Shop - Kids'} pageDescription={'Los mejores productos para niños'} >
-      <Typography variant='h1' component='h1'>Niños</Typography> 
+      <Typography variant='h1' component='h1'>Kids</Typography> 
       {/* "component" le indica al SEO que es el titulo de la pagina */}
-      <Typography variant='h2' sx={{ mb: 1 }}>Productos para niños</Typography>
+      <Typography variant='h2' sx={{ mb: 1 }}>Products for kids</Typography>
 
       {
         isLoading

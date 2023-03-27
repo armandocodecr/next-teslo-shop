@@ -40,7 +40,7 @@ const ProductAdminPage:FC<Props> = ({ product, slug }) => {
 
     const onSubmit = async ( form: IProduct ) => {
         
-        if( form.images.length < 2 ) return alert('Mínimos 2 imagenes');
+        if( form.images.length < 2 ) return alert('Min 2 images');
         setIsSaving(true);
 
         const newProduct = {
@@ -59,7 +59,7 @@ const ProductAdminPage:FC<Props> = ({ product, slug }) => {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Producto almacenado correctamente',
+                    title: 'Product stored correctly',
                     showConfirmButton: false,
                     timer: 1500
                   })
@@ -69,7 +69,7 @@ const ProductAdminPage:FC<Props> = ({ product, slug }) => {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Producto actualizado correctamente',
+                    title: 'Product updated successfully',
                     showConfirmButton: false,
                     timer: 1500
                   })
@@ -89,8 +89,8 @@ const ProductAdminPage:FC<Props> = ({ product, slug }) => {
 
     return (
         <AdminLayout 
-            title={'Producto'} 
-            subTitle={`Editando: ${ product.title }`}
+            title={'Product'} 
+            subTitle={`Editing: ${ product.title }`}
             icon={ <DriveFileRenameOutline /> }
         >
             <form onSubmit={ handleSubmit( onSubmit ) } >
@@ -99,7 +99,7 @@ const ProductAdminPage:FC<Props> = ({ product, slug }) => {
                         slug !== 'new' && (
                             <>
                                 <Box display='flex' alignItems='center'>
-                                    <Typography sx={{ mr: 2 }}>Estado del producto:</Typography>
+                                    <Typography sx={{ mr: 2 }}>Product status:</Typography>
                                     <FormGroup sx={{ display: 'flex', flexDirection: 'row' }}>
                                         <FormControlLabel 
                                             control={<Checkbox checked={productActivated} />} 
@@ -134,7 +134,7 @@ const ProductAdminPage:FC<Props> = ({ product, slug }) => {
                         type="submit"
                         disabled={ isSaving }
                     >
-                        Guardar
+                        Save
                     </Button>
 
 
@@ -145,55 +145,55 @@ const ProductAdminPage:FC<Props> = ({ product, slug }) => {
                     <Grid item xs={12} sm={ 6 }>
 
                         <TextField
-                            label="Título"
+                            label="Title"
                             variant="filled"
                             fullWidth 
                             sx={{ mb: 1 }}
                             { ...register('title', {
-                                required: 'Este campo es requerido',
-                                minLength: { value: 2, message: 'Mínimo 2 caracteres' }
+                                required: 'This field is required',
+                                minLength: { value: 2, message: 'Min 2 characters' }
                             })}
                             error={ !!errors.title }
                             helperText={ errors.title?.message }
                         />
 
                         <TextField
-                            label="Descripción"
+                            label="Description"
                             variant="filled"
                             fullWidth 
                             multiline
                             rows={8}
                             sx={{ mb: 1 }}
                             { ...register('description', {
-                                required: 'Este campo es requerido',
+                                required: 'This field is required',
                             })}
                             error={ !!errors.description }
                             helperText={ errors.description?.message }
                         />
 
                         <TextField
-                            label="Inventario"
+                            label="Inventory"
                             type='number'
                             variant="filled"
                             fullWidth 
                             sx={{ mb: 1 }}
                             { ...register('inStock', {
-                                required: 'Este campo es requerido',
-                                min: { value: 0, message: 'Mínimo de valor 0' }
+                                required: 'This field is required',
+                                min: { value: 0, message: 'Minimum of value 0' }
                             })}
                             error={ !!errors.inStock }
                             helperText={ errors.inStock?.message }
                         />
                         
                         <TextField
-                            label="Precio"
+                            label="Price"
                             type='number'
                             variant="filled"
                             fullWidth 
                             sx={{ mb: 1 }}
                             { ...register('price', {
-                                required: 'Este campo es requerido',
-                                min: { value: 0, message: 'Mínimo de valor 0' }
+                                required: 'This field is required',
+                                min: { value: 0, message: 'Minimum of value 0' }
                             })}
                             error={ !!errors.price }
                             helperText={ errors.price?.message }
@@ -207,7 +207,7 @@ const ProductAdminPage:FC<Props> = ({ product, slug }) => {
                             defaultValue={undefined}
                             render={({ field }) => (
                                 <FormControl>
-                                <FormLabel>Tipo</FormLabel>
+                                <FormLabel>Type</FormLabel>
                                     <RadioGroup row {...field}>
                                         {validTypes.map((option) => (
                                         <FormControlLabel
@@ -228,7 +228,7 @@ const ProductAdminPage:FC<Props> = ({ product, slug }) => {
                             defaultValue={undefined}
                             render={({ field }) => (
                                 <FormControl>
-                                <FormLabel>Género</FormLabel>
+                                <FormLabel>Gender</FormLabel>
                                 <RadioGroup row {...field}>
                                     {validGender.map((option) => (
                                     <FormControlLabel
@@ -287,19 +287,19 @@ const ProductAdminPage:FC<Props> = ({ product, slug }) => {
                             fullWidth
                             sx={{ mb: 1 }}
                             { ...register('slug', {
-                                required: 'Este campo es requerido',
-                                validate: (val) => val.trim().includes(' ') ? 'No puede tener espacion en blanco' : undefined
+                                required: 'This field is required',
+                                validate: (val) => val.trim().includes(' ') ? 'Cannot have blank space' : undefined
                             })}
                             error={ !!errors.slug }
                             helperText={ errors.slug?.message }
                         />
 
                         <TextField
-                            label="Etiquetas"
+                            label="Tags"
                             variant="filled"
                             fullWidth 
                             sx={{ mb: 1 }}
-                            helperText="Presiona [spacebar] para agregar"
+                            helperText="Press [spacebar] to add"
                             value={ newTagValue }
                             onChange={ ({ target }) => setNewTagValue(target.value) }
                             onKeyUp={ ({ code }) => code === 'Space' ? onNewTag() : undefined }
@@ -332,7 +332,7 @@ const ProductAdminPage:FC<Props> = ({ product, slug }) => {
                         <Divider sx={{ my: 2  }}/>
                         
                         <Box display='flex' flexDirection="column">
-                            <FormLabel sx={{ mb:1}}>Imágenes</FormLabel>
+                            <FormLabel sx={{ mb:1}}>Images</FormLabel>
                             <Button
                                 color="secondary"
                                 fullWidth
@@ -353,7 +353,7 @@ const ProductAdminPage:FC<Props> = ({ product, slug }) => {
                              />
 
                             <Chip 
-                                label="Es necesario al 2 imagenes"
+                                label="It is necessary to 2 images"
                                 color='error'
                                 variant='outlined'
                                 sx={{ display: getValues('images').length < 2 ? 'flex' : 'none' }}
@@ -377,7 +377,7 @@ const ProductAdminPage:FC<Props> = ({ product, slug }) => {
                                                         color="error"
                                                         onClick={ () => onDeleteImage(img) }
                                                     >
-                                                        Borrar
+                                                        Delete
                                                     </Button>
                                                 </CardActions>
                                             </Card>

@@ -19,7 +19,7 @@ const Index = () => {
 
     if( error ) {
         console.log(error);
-        return <Typography>Error al cargar la información</Typography>
+        return <Typography>Error loading information</Typography>
     }
 
     const {
@@ -35,7 +35,7 @@ const Index = () => {
   return (
     <AdminLayout
         title='Dashboard'
-        subTitle='Estadísticas generales'
+        subTitle='General Statistics'
         icon={ <DashboardOutlined /> }
     >
         
@@ -43,49 +43,49 @@ const Index = () => {
 
         <SummaryTile 
             title={ numberOfOrders }
-            subTitle='Ordenes totales'
+            subTitle='Total orders'
             icon={ <CreditCardOutlined color='secondary' sx={{ fontSize: 37 }} /> }
         />
 
         <SummaryTile 
             title={ paidOrders }
-            subTitle='Ordenes pagadas'
+            subTitle='Paid orders'
             icon={ <AttachMoneyOutlined color='success' sx={{ fontSize: 37 }} /> }
         />
 
         <SummaryTile 
             title={ notPaidOrders }
-            subTitle='Ordenes pendientes'
+            subTitle='Pending orders'
             icon={ <CreditCardOffOutlined color='error' sx={{ fontSize: 37 }} /> }
         />
 
         <SummaryTile 
             title={ numberOfClients }
-            subTitle='Clientes'
+            subTitle='Clients'
             icon={ <GroupOutlined color='primary' sx={{ fontSize: 37 }} /> }
         />
 
         <SummaryTile 
             title={ numberOfProducts }
-            subTitle='Productos'
+            subTitle='Products'
             icon={ <CategoryOutlined color='warning' sx={{ fontSize: 37 }} /> }
         />
 
         <SummaryTile 
             title={ productsWithNoInventory }
-            subTitle='Productos sin existencias'
+            subTitle='Not available'
             icon={ <CancelPresentationOutlined color='error' sx={{ fontSize: 37 }} /> }
         />
 
         <SummaryTile 
             title={ lowInventory }
-            subTitle='Bajo inventario'
+            subTitle='Inventory'
             icon={ <ProductionQuantityLimitsOutlined color='warning' sx={{ fontSize: 37 }} /> }
         />
 
         <SummaryTile 
             title={ refreshIn }
-            subTitle='Actualización en: '
+            subTitle='Updated: '
             icon={ <AccessTimeOutlined color='secondary' sx={{ fontSize: 37 }} /> }
         />
 
