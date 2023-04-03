@@ -20,7 +20,7 @@ export const useAuth = () => {
     const [providers, setProviders] = useState<any>({});
 
     //Estados del Register
-    const { registerUser } = useContext(AuthContext)
+    const { registerUser, loginUser } = useContext(AuthContext)
     
     useEffect(() => {
         getProviders().then( prov => {
@@ -31,6 +31,12 @@ export const useAuth = () => {
     const onLoginUser = async( { email, password }: FormData ) => {
         setShowError(false);
 
+        const isValidLogin = await loginUser( email, password );
+        if(!isValidLogin) {
+            setShowError(true);
+            setTimeout( () => { setShowError(false) }, 3000 )
+            return;
+        }
         await signIn( 'credentials', { email, password } );
 
     }
