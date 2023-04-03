@@ -85,7 +85,7 @@ const RegisterPage = () => {
                             { 
                                 ...register('password', {
                                     required: 'This field is required',
-                                    minLength: { value: 5, message: 'min 2 characters' }
+                                    minLength: { value: 5, message: 'min 5 characters' }
                                 }) 
                             }
                             error={ !!errors.password }
