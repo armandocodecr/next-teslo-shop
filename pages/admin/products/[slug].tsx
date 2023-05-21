@@ -11,7 +11,7 @@ import { Box, Button, capitalize, Card, CardActions, CardMedia,
 import Swal from 'sweetalert2';
 
 import { useFilesAndTags } from '../../../hooks';
-import { windowsDeleteConfirmation } from '../../../services';
+import { windowsDeleteConfirmation } from '../../../components/ui/windowsDeleteConfirmation';
 import { IProduct, validTypes, validGender, validSizes } from '../../../interfaces';
 import { AdminLayout } from '../../../components/layouts'
 import { dbProducts } from '../../../database';

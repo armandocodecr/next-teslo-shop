@@ -12,6 +12,7 @@ import { ShopLayout } from '../../components/layouts'
 import { dbOrders } from '../../database';
 import { IOrder } from '../../interfaces';
 import { tesloApi } from '../../api';
+import Cookie from 'js-cookie';
 
 export type OrderResponseBody = {
     id: string;
@@ -49,7 +50,7 @@ const OrderPage: NextPage<Props> = ({ order }) => {
             }); //llamamos al end point
 
             router.reload(); //Al recargar la pagina va a volver a hacer la peticion la backend par asegurarse de que todo esté bien, y nos regresa la orden pagada
-            
+            deleteCookiesAddress()
         } catch (error) {
             setIsPaying(false);
             console.log(error);
@@ -58,6 +59,16 @@ const OrderPage: NextPage<Props> = ({ order }) => {
 
     }
 
+    const deleteCookiesAddress = () => {
+        Cookie.remove('firstName')
+        Cookie.remove('lastName')
+        Cookie.remove('address')
+        Cookie.remove('address2')
+        Cookie.remove('zip')
+        Cookie.remove('city')
+        Cookie.remove('country')
+        Cookie.remove('phone')
+    }
 
   return (
     <ShopLayout title='Summary order' pageDescription={'Resumen de la orden'}>
