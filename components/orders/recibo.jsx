@@ -19,6 +19,7 @@ const Recibo = ( { infoReceipt }) => {
                             <Image
                                 style={{ width: "100px" }}
                                 src="https://res.cloudinary.com/dyuj1zglt/image/upload/v1677013007/LOGOS/pldfstlm7yd7fg6mbhdv.png"
+                                alt="logo de la empresa"
                             />
                         </View>
                         <View style={{ flex: 2 }}>
