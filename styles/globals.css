@@ -86,3 +86,76 @@
 .btn-recibo-pdf:hover{
   transform: scale(1.1); 
 }
+
+/* css-1t1j96h-MuiPaper-root-MuiDialog-paper */
+
+#container-video-demo{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.css-uhb5lp{
+  align-items: center !important;
+  padding: 30px;
+  flex-direction: column;
+}
+
+.css-uhb5lp p{
+  margin: 0 !important;
+}
+
+#boton-dialog{
+  position: absolute;
+  font-size: 15px;
+  font-weight: bold;
+  top: 15px;
+  right: 15px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+@media screen and ( max-width: 600px ) {
+
+  .css-uhb5lp{
+    text-align: center;
+  }
+
+}
+
+@media screen and ( max-width: 500px ) {
+
+  .css-uhb5lp{
+    padding: 10px;
+  }
+
+  .css-uhb5lp h2{
+    font-size: 16px;
+  }
+
+  .css-uhb5lp p{
+    font-size: 13px;
+  }
+
+}
+
+@media screen and ( max-width: 500px ) {
+
+  .css-uhb5lp{
+    padding: 10px;
+  }
+
+  .css-uhb5lp h2{
+    font-size: 13px;
+  }
+
+  .css-uhb5lp p{
+    font-size: 11px;
+  }
+
+  #container-video-demo{
+    height: 200px !important;
+  }
+
+}
