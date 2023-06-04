@@ -3,6 +3,7 @@ import { UiState } from './';
 type UiActionType = 
 | { type: '[UI] - ToggleMenu' }
 | { type: '[UI] - ToggleDropdownMenu', payload: boolean }
+| { type: '[UI] - CloseDialog' }
 
 export const uiReducer = ( state: UiState, action: UiActionType ): UiState => {
 
@@ -17,8 +18,13 @@ export const uiReducer = ( state: UiState, action: UiActionType ): UiState => {
              ...state,
              isDropdownOpen: action.payload
             }
+      case '[UI] - CloseDialog': 
+          return {
+             ...state,
+             isDialogOpen: !state.isDialogOpen
+          }
 
-       default:
-         return state;
+      default:
+        return state;
     }
 }

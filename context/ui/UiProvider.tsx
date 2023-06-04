@@ -3,7 +3,8 @@ import {  UiContext,  uiReducer } from './'
 
 export interface UiState {
     isMenuOpen: boolean
-    isDropdownOpen: boolean
+    isDropdownOpen: boolean,
+    isDialogOpen: boolean
 }
 
 interface Props {
@@ -12,7 +13,8 @@ interface Props {
 
 const  UI_INITIAL_STATE:  UiState = {
     isMenuOpen: false,
-    isDropdownOpen: true
+    isDropdownOpen: true,
+    isDialogOpen: true,
 }
 
 export const UiProvider: FC<Props> = ({ children }) => {
@@ -27,13 +29,18 @@ export const UiProvider: FC<Props> = ({ children }) => {
         dispatch({ type: '[UI] - ToggleDropdownMenu', payload: state })
     }
 
+    const handleCloseDialog = () => {
+        dispatch({ type: '[UI] - CloseDialog'})
+    }
+
     return (
        < UiContext.Provider value={{
            ...state,
 
            // Methods
            toggleSideMenu,
-           toggleDropdownMenu
+           toggleDropdownMenu,
+           handleCloseDialog
       }}>
           { children }
         </ UiContext.Provider>
